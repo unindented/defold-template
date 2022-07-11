@@ -1,0 +1,7 @@
+@ShutdownOnFailedCommand 1
+@NoPromptForPassword 1
+login $STEAM_USERNAME $STEAM_PASSWORD
+drm_wrap $STEAM_APP_ID "..\..\dist\windows\$APP_NAME\$APP_NAME.exe" "..\..\dist\windows\$APP_NAME\$APP_NAME.exe" drmtoolp 0
+drm_wrap $STEAM_APP_ID "..\..\dist\linux\$APP_NAME\$APP_NAME.x86_64" "..\..\dist\linux\$APP_NAME\$APP_NAME.x86_64" drmtoolp 0
+run_app_build "..\..\assets\steam\app_build_$STEAM_APP_ID.vdf"
+quit

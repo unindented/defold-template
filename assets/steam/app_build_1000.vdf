@@ -1,0 +1,15 @@
+"AppBuild"
+{
+	"AppID" "$STEAM_APP_ID"
+
+	"Desc" "Build $APP_VERSION"
+	"ContentRoot" "..\..\dist\"
+
+	"Depots"
+	{
+		"2068251" "depot_build_$STEAM_COMMON_DEPOT_ID.vdf"
+		"2068252" "depot_build_$STEAM_WINDOWS_DEPOT_ID.vdf"
+		"2068253" "depot_build_$STEAM_MACOS_DEPOT_ID.vdf"
+		"2068254" "depot_build_$STEAM_LINUX_DEPOT_ID.vdf"
+	}
+}

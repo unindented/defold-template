@@ -1,0 +1,13 @@
+"DepotBuild"
+{
+	"DepotID" "$STEAM_MACOS_DEPOT_ID"
+
+	"FileMapping"
+	{
+		"LocalPath" ".\macos\*"
+		"DepotPath" "."
+		"Recursive" "1"
+	}
+	"FileExclusion" ".\macos\*.dmg"
+	"FileExclusion" ".\macos\*.zip"
+}

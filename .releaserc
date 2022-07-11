@@ -1,0 +1,62 @@
+{
+  "branches": [
+    "main"
+  ],
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md"
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "make all APP_VERSION=${nextRelease.version}",
+        "publishCmd": "make publish APP_VERSION=${nextRelease.version}"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "CHANGELOG.md"
+        ]
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "dist/windows/*.zip"
+          },
+          {
+            "path": "dist/macos/*.dmg"
+          },
+          {
+            "path": "dist/macos/*.zip"
+          },
+          {
+            "path": "dist/linux/*.zip"
+          },
+          {
+            "path": "dist/web/*.zip"
+          }
+        ]
+      }
+    ]
+  ]
+}

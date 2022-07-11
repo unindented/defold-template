@@ -1,0 +1,11 @@
+"DepotBuild"
+{
+	"DepotID" "$STEAM_COMMON_DEPOT_ID"
+
+	"FileMapping"
+	{
+		"LocalPath" "*"
+		"DepotPath" "."
+		"Recursive" "0"
+	}
+}

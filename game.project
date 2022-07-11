@@ -1,5 +1,8 @@
 [project]
 title = Template
+version = 0.0.0-development
+publisher = Daniel Perez Alvarez
+developer = Daniel Perez Alvarez
 
 [bootstrap]
 main_collection = /main/main.collectionc
@@ -9,22 +12,30 @@ game_binding = /input/game.input_bindingc
 use_accelerometer = 0
 
 [display]
-width = 1280
-height = 720
+width = 1024
+height = 768
 
 [script]
 shared_state = 1
 
 [windows]
-app_icon = /assets/app_icons/appicon.ico
+app_icon = /assets/windows/icon.ico
 
 [osx]
-app_icon = /assets/app_icons/appicon.icns
+app_icon = /assets/macos/icon.icns
+bundle_identifier = org.unindented.template
+bundle_version = 0.0.0-development
+
+[ios]
+bundle_identifier = org.unindented.template
+bundle_version = 0.0.0-development
 
 [android]
-input_method = HiddenInputField
+package = org.unindented.template
+version_code = 2100000000
 
-[physics]
-gravity_y = -1000.0
-scale = 0.01
+[html5]
+show_made_with_defold = 0
+show_fullscreen_button = 0
+cssfile = /builtins/manifests/web/dark_theme.css
 
