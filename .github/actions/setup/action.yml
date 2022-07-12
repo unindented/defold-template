@@ -1,0 +1,82 @@
+name: Setup
+description: All the boring stuff.
+
+inputs:
+  macos_team_id:
+    description: "macOS team ID"
+    required: true
+  macos_apple_id:
+    description: "macOS Apple ID"
+    required: true
+  macos_certificate:
+    description: "macOS certificate, as a base64-encoded p12"
+    required: true
+  macos_certificate_password:
+    description: "macOS certificate password"
+    required: true
+  macos_keychain_password:
+    description: "macOS keychain password"
+    required: true
+  macos_notarytool_password:
+    description: "macOS notarytool password"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Cache tools
+      id: cache-tools
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-tools
+      with:
+        path: tools
+        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('Makefile') }}
+        restore-keys: |
+          ${{ runner.os }}-${{ env.cache-name }}-
+          ${{ runner.os }}-
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: microsoft
+        java-version: "11"
+
+    - name: Set up Node
+      uses: actions/setup-node@v3
+      with:
+        node-version-file: .nvmrc
+        cache: npm
+
+    - name: Install Node dependencies
+      shell: bash
+      run: npm ci
+
+    - name: Install misc tools
+      shell: bash
+      run: |
+        brew install coreutils gettext graphicsmagick imagemagick wine-stable
+
+    - name: Set up macOS certificates
+      env:
+        MACOS_CERTIFICATE: ${{ inputs.macos_certificate }}
+        MACOS_CERTIFICATE_PASSWORD: ${{ inputs.macos_certificate_password }}
+        MACOS_KEYCHAIN_PASSWORD: ${{ inputs.macos_keychain_password }}
+      shell: bash
+      run: |
+        echo "$MACOS_CERTIFICATE" | base64 --decode > certificate.p12
+        security create-keychain -p "$MACOS_KEYCHAIN_PASSWORD" release.keychain
+        security set-keychain-settings -lut 21600 release.keychain
+        security unlock-keychain -p "$MACOS_KEYCHAIN_PASSWORD" release.keychain
+        security import certificate.p12 -T /usr/bin/codesign -P "$MACOS_CERTIFICATE_PASSWORD" -k release.keychain
+        security set-key-partition-list -s -S apple-tool:,apple:,codesign: -k "$MACOS_KEYCHAIN_PASSWORD" release.keychain
+        security list-keychains -d user -s release.keychain login.keychain
+
+    - name: Set up macOS notarytool
+      env:
+        MACOS_TEAM_ID: ${{ inputs.macos_team_id }}
+        MACOS_APPLE_ID: ${{ inputs.macos_apple_id }}
+        MACOS_NOTARYTOOL_PASSWORD: ${{ inputs.macos_notarytool_password }}
+      shell: bash
+      run: |
+        xcrun notarytool store-credentials "AC_PASSWORD" --team-id "$MACOS_TEAM_ID" --apple-id "$MACOS_APPLE_ID" --password "$MACOS_NOTARYTOOL_PASSWORD"

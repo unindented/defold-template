@@ -1,13 +1,13 @@
-name: Release
+name: Pull Request
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
 jobs:
-  release:
-    name: Release
+  pull_request:
+    name: Pull Request
     runs-on: macos-latest
 
     steps:
@@ -26,25 +26,12 @@ jobs:
           macos_keychain_password: ${{ secrets.MACOS_KEYCHAIN_PASSWORD }}
           macos_notarytool_password: ${{ secrets.MACOS_NOTARYTOOL_PASSWORD }}
 
-      - name: Release
+      - name: Build
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFOLD_PRIVATE_USERNAME: ${{ secrets.DEFOLD_PRIVATE_USERNAME }}
           DEFOLD_PRIVATE_TOKEN: ${{ secrets.DEFOLD_PRIVATE_TOKEN }}
           MACOS_TEAM_ID: ${{ secrets.MACOS_TEAM_ID }}
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-          BUTLER_PROJECT: ${{ secrets.BUTLER_PROJECT }}
-          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
-          STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
-          STEAM_APP_ID: ${{ secrets.STEAM_APP_ID }}
-          STEAM_COMMON_DEPOT_ID: ${{ secrets.STEAM_COMMON_DEPOT_ID }}
-          STEAM_WINDOWS_DEPOT_ID: ${{ secrets.STEAM_WINDOWS_DEPOT_ID }}
-          STEAM_MACOS_DEPOT_ID: ${{ secrets.STEAM_MACOS_DEPOT_ID }}
-          STEAM_LINUX_DEPOT_ID: ${{ secrets.STEAM_LINUX_DEPOT_ID }}
-          STEAM_SSFN_NAME: ${{ secrets.STEAM_SSFN_NAME }}
-          STEAM_SSFN_CONTENTS: ${{ secrets.STEAM_SSFN_CONTENTS }}
-          STEAM_CONFIG_CONTENTS: ${{ secrets.STEAM_CONFIG_CONTENTS }}
-        run: make release
+        run: make all APP_VERSION=0.0.1
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
