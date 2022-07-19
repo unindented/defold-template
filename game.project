@@ -3,6 +3,7 @@ title = Template
 version = 0.0.0-development
 publisher = Daniel Perez Alvarez
 developer = Daniel Perez Alvarez
+dependencies#0 = https://github.com/britzl/monarch/archive/refs/tags/3.6.1.zip
 
 [bootstrap]
 main_collection = /main/main.collectionc
@@ -12,8 +13,10 @@ game_binding = /input/game.input_bindingc
 use_accelerometer = 0
 
 [display]
-width = 1024
-height = 768
+width = 1600
+height = 900
+high_dpi = 1
+display_profiles = /main/main.display_profilesc
 
 [script]
 shared_state = 1

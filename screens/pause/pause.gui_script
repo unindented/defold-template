@@ -1,16 +1,23 @@
 local messages = require("modules.messages")
 local navigation = require("modules.navigation")
 local screens = require("modules.screens")
+local ui = require("modules.ui")
 
 function init(self)
-  msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })
+  msg.post(".", "acquire_input_focus")
 
-  -- navigation.debug()
+  self.root = gui.get_node("root")
+  self.transition = navigation.transition_popup(self.root)
+
+  gui.set_render_order(ui.GUI_ORDER_POPUP_OVERLAY)
+
   msg.post("#", messages.SHOW_FIRST_SCREEN)
 end
 
 function on_message(self, message_id, message, sender)
+  self.transition.handle(message_id, message, sender)
+
   if message_id == messages.SHOW_FIRST_SCREEN_ID then
-    navigation.screen_show(screens.TITLE)
+    navigation.popup_show(screens.PAUSE_MAIN)
   end
 end

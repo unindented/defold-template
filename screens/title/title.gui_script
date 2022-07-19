@@ -1,0 +1,30 @@
+local actions = require("modules.actions")
+local navigation = require("modules.navigation")
+local screens = require("modules.screens")
+local utils = require("modules.utils")
+
+function init(self)
+  msg.post(".", "acquire_input_focus")
+
+  self.root = gui.get_node("root")
+  self.play = gui.get_node("play/button")
+  self.settings = gui.get_node("settings/button")
+  self.credits = gui.get_node("credits/button")
+  self.quit = gui.get_node("quit/button")
+end
+
+function on_input(self, action_id, action)
+  if action_id == actions.ESCAPE and action.released then
+    navigation.screen_show(screens.SETTINGS)
+  elseif action_id == actions.TOUCH and action.released then
+    if gui.pick_node(self.play, action.x, action.y) then
+      navigation.screen_show(screens.CHARACTER_SELECTION)
+    elseif gui.pick_node(self.settings, action.x, action.y) then
+      navigation.screen_show(screens.SETTINGS)
+    elseif gui.pick_node(self.credits, action.x, action.y) then
+      navigation.screen_show(screens.CREDITS)
+    elseif gui.pick_node(self.quit, action.x, action.y) then
+      utils.quit()
+    end
+  end
+end
