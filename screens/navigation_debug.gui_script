@@ -1,12 +1,12 @@
 local navigation = require("modules.navigation")
-local ui = require("modules.ui")
 local utils = require("modules.utils")
+local ui = require("ui.ui")
 
 function init(self)
-  self.debug_text = gui.get_node("debug/text")
+  ui.set_render_order_debug()
 
+  self.debug_text = gui.get_node("debug/text")
   gui.set_enabled(self.debug_text, utils.is_debug())
-  gui.set_render_order(ui.GUI_ORDER_DEBUG)
 end
 
 function update(self, dt)

@@ -1,8 +1,4 @@
 script: "/screens/settings_main/settings_main.gui_script"
-fonts {
-  name: "label"
-  font: "/assets/fonts/label.font"
-}
 background_color {
   x: 0.0
   y: 0.0
@@ -101,13 +97,13 @@ nodes {
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/templates/heading.gui"
+  template: "/ui/components/heading.gui"
   template_node_child: false
   custom_type: 0
 }
 nodes {
   position {
-    x: 6.0
+    x: 4.0
     y: 6.0
     z: 0.0
     w: 1.0
@@ -208,7 +204,7 @@ nodes {
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/templates/button.gui"
+  template: "/ui/components/button.gui"
   template_node_child: false
   custom_type: 0
 }
@@ -245,7 +241,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "screens/button"
+  texture: "ui/button_normal"
   id: "display/button"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -255,10 +251,10 @@ nodes {
   layer: "button"
   inherit_alpha: true
   slice9 {
-    x: 22.0
-    y: 22.0
-    z: 22.0
-    w: 22.0
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
   }
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
@@ -270,7 +266,7 @@ nodes {
 }
 nodes {
   position {
-    x: 6.0
+    x: 4.0
     y: 6.0
     z: 0.0
     w: 1.0
@@ -370,7 +366,7 @@ nodes {
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/templates/button.gui"
+  template: "/ui/components/button.gui"
   template_node_child: false
   custom_type: 0
 }
@@ -407,7 +403,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "screens/button"
+  texture: "ui/button_normal"
   id: "sound/button"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -417,10 +413,10 @@ nodes {
   layer: "button"
   inherit_alpha: true
   slice9 {
-    x: 22.0
-    y: 22.0
-    z: 22.0
-    w: 22.0
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
   }
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
@@ -432,7 +428,7 @@ nodes {
 }
 nodes {
   position {
-    x: 6.0
+    x: 4.0
     y: 6.0
     z: 0.0
     w: 1.0
@@ -532,7 +528,7 @@ nodes {
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/templates/button.gui"
+  template: "/ui/components/button.gui"
   template_node_child: false
   custom_type: 0
 }
@@ -569,7 +565,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "screens/button"
+  texture: "ui/button_normal"
   id: "gameplay/button"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -579,10 +575,10 @@ nodes {
   layer: "button"
   inherit_alpha: true
   slice9 {
-    x: 22.0
-    y: 22.0
-    z: 22.0
-    w: 22.0
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
   }
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
@@ -594,7 +590,7 @@ nodes {
 }
 nodes {
   position {
-    x: 6.0
+    x: 4.0
     y: 6.0
     z: 0.0
     w: 1.0
@@ -694,7 +690,7 @@ nodes {
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/templates/button.gui"
+  template: "/ui/components/button.gui"
   template_node_child: false
   custom_type: 0
 }
@@ -731,7 +727,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "screens/button"
+  texture: "ui/button_normal"
   id: "language/button"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -741,10 +737,10 @@ nodes {
   layer: "button"
   inherit_alpha: true
   slice9 {
-    x: 22.0
-    y: 22.0
-    z: 22.0
-    w: 22.0
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
   }
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
@@ -756,7 +752,7 @@ nodes {
 }
 nodes {
   position {
-    x: 6.0
+    x: 4.0
     y: 6.0
     z: 0.0
     w: 1.0
@@ -856,7 +852,7 @@ nodes {
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/templates/button.gui"
+  template: "/ui/components/button.gui"
   template_node_child: false
   custom_type: 0
 }
@@ -893,32 +889,33 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "screens/button"
+  texture: "ui/button_normal"
   id: "back/button"
   xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
+  yanchor: YANCHOR_BOTTOM
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
   parent: "back"
   layer: "button"
   inherit_alpha: true
   slice9 {
-    x: 22.0
-    y: 22.0
-    z: 22.0
-    w: 22.0
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
   }
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
   clipping_inverted: false
   alpha: 1.0
+  overridden_fields: 13
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
 }
 nodes {
   position {
-    x: 6.0
+    x: 4.0
     y: 6.0
     z: 0.0
     w: 1.0
@@ -953,7 +950,7 @@ nodes {
   font: "label"
   id: "back/text"
   xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_BOTTOM
+  yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   outline {
     x: 1.0
@@ -976,7 +973,6 @@ nodes {
   outline_alpha: 1.0
   shadow_alpha: 1.0
   overridden_fields: 8
-  overridden_fields: 13
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0

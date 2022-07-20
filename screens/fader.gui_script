@@ -1,11 +1,11 @@
 local navigation = require("modules.navigation")
-local ui = require("modules.ui")
+local ui = require("ui.ui")
 
 function init(self)
+  ui.set_render_order_fader()
+
   self.root = gui.get_node("root")
   self.transition = navigation.transition_screen(self.root)
-
-  gui.set_render_order(ui.GUI_ORDER_FADER)
 end
 
 function on_message(self, message_id, message, sender)

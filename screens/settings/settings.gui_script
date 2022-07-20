@@ -1,19 +1,19 @@
 local messages = require("modules.messages")
 local navigation = require("modules.navigation")
 local screens = require("modules.screens")
-local ui = require("modules.ui")
 local utils = require("modules.utils")
+local ui = require("ui.ui")
 
 function init(self)
-  msg.post(".", "acquire_input_focus")
+  ui.acquire_input()
+  ui.set_render_order_popup_overlay()
 
   self.root = gui.get_node("root")
-  self.version_text = gui.get_node("version/text")
   self.transition = navigation.transition_popup(self.root)
 
+  self.version_text = gui.get_node("version/text")
   gui.set_text(self.version_text, utils.version())
   gui.set_enabled(self.version_text, not utils.is_debug())
-  gui.set_render_order(ui.GUI_ORDER_POPUP_OVERLAY)
 
   msg.post("#", messages.SHOW_FIRST_SCREEN)
 end

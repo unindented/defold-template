@@ -1,8 +1,4 @@
 script: "/screens/pause_main/pause_main.gui_script"
-fonts {
-  name: "label"
-  font: "/assets/fonts/label.font"
-}
 background_color {
   x: 0.0
   y: 0.0
@@ -101,7 +97,7 @@ nodes {
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/templates/button.gui"
+  template: "/ui/components/button.gui"
   template_node_child: false
   custom_type: 0
 }
@@ -138,7 +134,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "screens/button"
+  texture: "ui/button_normal"
   id: "back/button"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -148,10 +144,10 @@ nodes {
   layer: "button"
   inherit_alpha: true
   slice9 {
-    x: 22.0
-    y: 22.0
-    z: 22.0
-    w: 22.0
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
   }
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
@@ -163,7 +159,7 @@ nodes {
 }
 nodes {
   position {
-    x: 6.0
+    x: 4.0
     y: 6.0
     z: 0.0
     w: 1.0
@@ -263,7 +259,7 @@ nodes {
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/templates/button.gui"
+  template: "/ui/components/button.gui"
   template_node_child: false
   custom_type: 0
 }
@@ -300,7 +296,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "screens/button"
+  texture: "ui/button_normal"
   id: "settings/button"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -310,10 +306,10 @@ nodes {
   layer: "button"
   inherit_alpha: true
   slice9 {
-    x: 22.0
-    y: 22.0
-    z: 22.0
-    w: 22.0
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
   }
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
@@ -325,7 +321,7 @@ nodes {
 }
 nodes {
   position {
-    x: 6.0
+    x: 4.0
     y: 6.0
     z: 0.0
     w: 1.0
@@ -425,7 +421,7 @@ nodes {
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/templates/button.gui"
+  template: "/ui/components/button.gui"
   template_node_child: false
   custom_type: 0
 }
@@ -462,7 +458,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "screens/button"
+  texture: "ui/button_normal"
   id: "title/button"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -472,10 +468,10 @@ nodes {
   layer: "button"
   inherit_alpha: true
   slice9 {
-    x: 22.0
-    y: 22.0
-    z: 22.0
-    w: 22.0
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
   }
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
@@ -488,7 +484,7 @@ nodes {
 }
 nodes {
   position {
-    x: 6.0
+    x: 4.0
     y: 6.0
     z: 0.0
     w: 1.0

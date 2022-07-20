@@ -4,6 +4,8 @@ version = 0.0.0-development
 publisher = Daniel Perez Alvarez
 developer = Daniel Perez Alvarez
 dependencies#0 = https://github.com/britzl/monarch/archive/refs/tags/3.6.1.zip
+dependencies#1 = https://github.com/britzl/gooey/archive/refs/tags/10.3.0.zip
+dependencies#2 = https://github.com/klaytonkowalski/library-defold-colors/archive/refs/tags/1.1.0.zip
 
 [bootstrap]
 main_collection = /main/main.collectionc
@@ -36,6 +38,7 @@ bundle_version = 0.0.0-development
 [android]
 package = org.unindented.template
 version_code = 2100000000
+input_method = HiddenInputField
 
 [html5]
 show_made_with_defold = 0

@@ -1,25 +1,29 @@
 local actions = require("modules.actions")
 local navigation = require("modules.navigation")
-local ui = require("modules.ui")
+local ui = require("ui.ui")
 
 function init(self)
-  msg.post(".", "acquire_input_focus")
+  ui.acquire_input()
+  ui.set_render_order_popup_content()
+
+  ui.button("back")
 
   self.root = gui.get_node("root")
-  self.back = gui.get_node("back/button")
   self.transition = navigation.transition_popup(self.root)
-
-  gui.set_render_order(ui.GUI_ORDER_POPUP_CONTENT)
 end
 
 function on_input(self, action_id, action)
   if action_id == actions.ESCAPE and action.released then
     navigation.popup_pop()
-  elseif action_id == actions.TOUCH and action.released then
-    if gui.pick_node(self.back, action.x, action.y) then
-      navigation.popup_pop()
-    end
+    return true
   end
+
+  local group = ui.group("group", function()
+    ui.button("back", action_id, action, function()
+      navigation.popup_pop()
+    end)
+  end)
+  return group.consumed
 end
 
 function on_message(self, message_id, message, sender)

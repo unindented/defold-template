@@ -1,7 +1,7 @@
 script: ""
 fonts {
   name: "label"
-  font: "/assets/fonts/label.font"
+  font: "/ui/fonts/label.font"
 }
 background_color {
   x: 0.0
