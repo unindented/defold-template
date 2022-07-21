@@ -125,7 +125,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
+    x: 220.0
     y: 60.0
     z: 0.0
     w: 1.0
@@ -196,7 +196,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "PLAY"
+  text: "Play"
   font: "label"
   id: "play/text"
   xanchor: XANCHOR_NONE
@@ -289,7 +289,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
+    x: 220.0
     y: 60.0
     z: 0.0
     w: 1.0
@@ -360,7 +360,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "SETTINGS"
+  text: "Settings"
   font: "label"
   id: "settings/text"
   xanchor: XANCHOR_NONE
@@ -453,7 +453,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
+    x: 220.0
     y: 60.0
     z: 0.0
     w: 1.0
@@ -524,7 +524,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "CREDITS"
+  text: "Credits"
   font: "label"
   id: "credits/text"
   xanchor: XANCHOR_NONE
@@ -617,7 +617,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
+    x: 220.0
     y: 60.0
     z: 0.0
     w: 1.0
@@ -688,7 +688,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "QUIT"
+  text: "Quit"
   font: "label"
   id: "quit/text"
   xanchor: XANCHOR_NONE

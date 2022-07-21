@@ -6,6 +6,7 @@ function init(self)
   ui.acquire_input()
   ui.set_render_order_popup_content()
 
+  ui.heading("heading")
   ui.button("back")
 
   self.root = gui.get_node("root")

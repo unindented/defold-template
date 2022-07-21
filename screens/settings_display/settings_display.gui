@@ -134,7 +134,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "DISPLAY"
+  text: "Display"
   font: "label"
   id: "heading/text"
   xanchor: XANCHOR_NONE
@@ -228,7 +228,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
+    x: 220.0
     y: 60.0
     z: 0.0
     w: 1.0
@@ -298,7 +298,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "GO BACK"
+  text: "Go back"
   font: "label"
   id: "back/text"
   xanchor: XANCHOR_NONE

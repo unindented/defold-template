@@ -121,7 +121,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
+    x: 220.0
     y: 60.0
     z: 0.0
     w: 1.0
@@ -192,7 +192,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "TITLE"
+  text: "Title"
   font: "label"
   id: "title/text"
   xanchor: XANCHOR_NONE

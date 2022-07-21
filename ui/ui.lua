@@ -1,5 +1,6 @@
 local gooey = require("gooey.gooey")
 local colors = require("modules.colors")
+local i18n = require("modules.i18n")
 local constants = require("ui.constants")
 
 local M = gooey.create_theme()
@@ -31,18 +32,27 @@ local refresh_button_primary =
 
 function M.button(node_id, action_id, action, fn)
   if not action then
-    local node = gui.get_node(node_id .. "/button")
-    gui.set_color(node, colors.palette.button_default)
+    local button = gui.get_node(node_id .. "/button")
+    gui.set_color(button, colors.palette.button_default)
+    local text = gui.get_node(node_id .. "/text")
+    i18n.set_text(text, nil, string.utf8upper)
   end
   return gooey.button(node_id .. "/button", action_id, action, fn, refresh_button_normal)
 end
 
 function M.button_primary(node_id, action_id, action, fn)
   if not action then
-    local node = gui.get_node(node_id .. "/button")
-    gui.set_color(node, colors.palette.button_primary)
+    local button = gui.get_node(node_id .. "/button")
+    gui.set_color(button, colors.palette.button_primary)
+    local text = gui.get_node(node_id .. "/text")
+    i18n.set_text(text, nil, string.utf8upper)
   end
   return gooey.button(node_id .. "/button", action_id, action, fn, refresh_button_primary)
+end
+
+function M.heading(node_id)
+  local text = gui.get_node(node_id .. "/text")
+  i18n.set_text(text, nil, string.utf8upper)
 end
 
 function M.acquire_input()

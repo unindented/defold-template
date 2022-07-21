@@ -7,6 +7,7 @@ function init(self)
   ui.acquire_input()
   ui.set_render_order_popup_content()
 
+  ui.heading("heading")
   ui.button("display")
   ui.button("sound")
   ui.button("gameplay")

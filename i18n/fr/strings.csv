@@ -1,0 +1,14 @@
+Original,Translation,Location,Notes
+Play,Jouer,Title screen,Button
+Settings,Réglages,Title screen,Button
+Credits,Crédits,Title screen,Button
+Quit,Quitter,Title screen,Button
+Display,Affichage,Settings menu,Button / Heading
+Sound,Son,Settings menu,Button / Heading
+Gameplay,Jouabilité,Settings menu,Button / Heading
+Language,Changer langue,Settings menu,Button / Heading
+Go back,Retour,Settings menu,Button
+Back to title,Retour au titre,Pause menu,Button
+Continue,Continuer,Pause menu,Button
+Title,Titre,Character selection screen,Button
+Start,Lancer,Character selection screen,Button
