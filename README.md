@@ -26,6 +26,16 @@ You can then export all those variables by running something like:
 export $(cat .env | xargs)
 ```
 
+There's two environment variables, `DEFOLD_PRIVATE_USERNAME` and `DEFOLD_PRIVATE_TOKEN`, that need to be made available to the Defold editor.
+
+On macOS, you can do so by creating launch agents that invoke `launchctl setenv`. I've created files to help you do that in `assets/macos/setenv.*`. Just replace their contents with the right values, and copy them to `~/Library/LaunchAgents`:
+
+```
+cp assets/macos/setenv.* ~/Library/LaunchAgents/
+```
+
+You can log out and log back in, and they should be set.
+
 ### Project name
 
 You'll also want to tweak the project name. Make sure to change it both in `game.project`, and in `Makefile`.
