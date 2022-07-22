@@ -6,7 +6,14 @@ function init(self)
   ui.acquire_input()
   ui.set_render_order_popup_content()
 
+  local master_volume = 1
+  local music_volume = 1
+  local effects_volume = 1
+
   ui.heading("heading")
+  ui.slider("master_volume").scroll_to(1 - master_volume, 0)
+  ui.slider("music_volume").scroll_to(1 - music_volume, 0)
+  ui.slider("effects_volume").scroll_to(1 - effects_volume, 0)
   ui.button("back")
 
   self.root = gui.get_node("root")
@@ -20,6 +27,9 @@ function on_input(self, action_id, action)
   end
 
   local group = ui.group("group", function()
+    ui.slider("master_volume", action_id, action, function() end)
+    ui.slider("music_volume", action_id, action, function() end)
+    ui.slider("effects_volume", action_id, action, function() end)
     ui.button("back", action_id, action, function()
       navigation.popup_pop()
     end)

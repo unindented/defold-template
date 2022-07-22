@@ -1,19 +1,16 @@
 local messages = require("modules.messages")
 local navigation = require("modules.navigation")
 local screens = require("modules.screens")
-local utils = require("modules.utils")
 local ui = require("ui.ui")
 
 function init(self)
   ui.acquire_input()
   ui.set_render_order_popup_overlay()
 
+  ui.version("version")
+
   self.root = gui.get_node("root")
   self.transition = navigation.transition_popup(self.root)
-
-  self.version_text = gui.get_node("version/text")
-  gui.set_text(self.version_text, utils.version())
-  gui.set_enabled(self.version_text, not utils.is_debug())
 
   msg.post("#", messages.SHOW_FIRST_SCREEN)
 end

@@ -8,6 +8,9 @@ Sound,Sonido,Settings menu,Button / Heading
 Gameplay,Jugabilidad,Settings menu,Button / Heading
 Language,Idioma,Settings menu,Button / Heading
 Go back,Ir atrás,Settings menu,Button
+Main volume,Volumen principal,Sound settings menu,Slider
+Music volume,Música,Sound settings menu,Slider
+Effects volume,Efectos,Sound settings menu,Slider
 Back to title,Menú principal,Pause menu,Button
 Continue,Continuar,Pause menu,Button
 Title,Título,Character selection screen,Button
