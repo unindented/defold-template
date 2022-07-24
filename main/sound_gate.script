@@ -1,0 +1,28 @@
+local log = require("modules.log")
+local messages = require("modules.messages")
+
+local GATE_TIME = 0.3
+
+function init(self)
+  self.sounds = {}
+end
+
+function update(self, dt)
+  for k, _ in pairs(self.sounds) do
+    self.sounds[k] = self.sounds[k] - dt
+    if self.sounds[k] < 0 then
+      self.sounds[k] = nil
+    end
+  end
+end
+
+function on_message(self, message_id, message, sender)
+  if message_id == messages.PLAY_GATED_SOUND_ID then
+    if self.sounds[message.soundcomponent] == nil then
+      self.sounds[message.soundcomponent] = GATE_TIME
+      sound.play(message.soundcomponent, { gain = message.gain })
+    else
+      log.i("gated sound " .. message.soundcomponent)
+    end
+  end
+end

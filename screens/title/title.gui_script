@@ -3,6 +3,7 @@ local navigation = require("modules.navigation")
 local screens = require("modules.screens")
 local utils = require("modules.utils")
 local ui = require("ui.ui")
+local sfx = require("modules.sfx")
 
 function init(self)
   ui.acquire_input()
@@ -11,6 +12,8 @@ function init(self)
   ui.button_primary("settings")
   ui.button_primary("credits")
   ui.button_primary("quit")
+
+  sfx.play_music("title")
 end
 
 function on_input(self, action_id, action)

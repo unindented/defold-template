@@ -1,4 +1,5 @@
 local actions = require("modules.actions")
+local messages = require("modules.messages")
 local navigation = require("modules.navigation")
 local screens = require("modules.screens")
 local ui = require("ui.ui")

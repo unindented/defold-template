@@ -1,5 +1,6 @@
 local gooey = require("gooey.gooey")
 local i18n = require("modules.i18n")
+local sfx = require("modules.sfx")
 local utils = require("modules.utils")
 local colors = require("ui.colors")
 local constants = require("ui.constants")
@@ -8,6 +9,13 @@ local M = gooey.create_theme()
 
 local BUTTON_NORMAL = hash("button_normal")
 local BUTTON_PRESSED = hash("button_pressed")
+
+local function with_sound(fn)
+  return function(element)
+    sfx.play_effect("pluck")
+    fn(element)
+  end
+end
 
 local function refresh_button(normal_color, over_color)
   return function(button)
@@ -37,7 +45,13 @@ function M.button(node_id, action_id, action, fn)
     local text = gui.get_node(node_id .. "/text")
     i18n.set_text(text, nil, string.utf8upper)
   end
-  return gooey.button(node_id .. "/button", action_id, action, fn, refresh_button_normal)
+  return gooey.button(
+    node_id .. "/button",
+    action_id,
+    action,
+    with_sound(fn),
+    refresh_button_normal
+  )
 end
 
 function M.button_primary(node_id, action_id, action, fn)
@@ -47,7 +61,13 @@ function M.button_primary(node_id, action_id, action, fn)
     local text = gui.get_node(node_id .. "/text")
     i18n.set_text(text, nil, string.utf8upper)
   end
-  return gooey.button(node_id .. "/button", action_id, action, fn, refresh_button_primary)
+  return gooey.button(
+    node_id .. "/button",
+    action_id,
+    action,
+    with_sound(fn),
+    refresh_button_primary
+  )
 end
 
 local function refresh_slider(slider_id)

@@ -1,6 +1,7 @@
 local actions = require("modules.actions")
 local navigation = require("modules.navigation")
 local screens = require("modules.screens")
+local sfx = require("modules.sfx")
 local ui = require("ui.ui")
 
 function init(self)
@@ -8,6 +9,8 @@ function init(self)
 
   ui.button("title")
   ui.button("start")
+
+  sfx.play_music("overworld")
 end
 
 function on_input(self, action_id, action)
