@@ -154,7 +154,10 @@ run-linux: $(BOB_PATH)
 
 .PHONY: version
 version:
-	perl -i -pe 's/0.0.0-development/$(APP_VERSION)/g;' -pe 's/2100000000/$(subst .,,$(APP_VERSION))/g;' game.project
+	perl -i -pe 's/game_debug.appmanifest/game_release.appmanifest/g;' \
+		-pe 's/0.0.0-development/$(APP_VERSION)/g;' \
+		-pe 's/2100000000/$(subst .,,$(APP_VERSION))/g;' \
+		game.project
 
 .PHONY: publish
 publish:
