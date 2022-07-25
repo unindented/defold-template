@@ -54,6 +54,8 @@ show_made_with_defold = 0
 show_fullscreen_button = 0
 cssfile = /builtins/manifests/web/dark_theme.css
 
+[native_extension]
+app_manifest = /game_debug.appmanifest
 
 [umami]
 dsn = https://umm.unindented.org
