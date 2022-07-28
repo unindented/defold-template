@@ -7,6 +7,8 @@ function init(self)
   ui.set_render_order_popup_content()
 
   ui.heading("heading")
+  ui.checkbox("reduce_motion")
+  ui.checkbox("disable_shaders")
   ui.button("back")
 
   self.root = gui.get_node("root")
@@ -20,7 +22,9 @@ function on_input(self, action_id, action)
   end
 
   local group = ui.group("group", function()
-    ui.button("back", action_id, action, function()
+    ui.checkbox("reduce_motion", nil, action_id, action, function() end)
+    ui.checkbox("disable_shaders", nil, action_id, action, function() end)
+    ui.button("back", nil, action_id, action, function()
       navigation.popup_pop()
     end)
   end)

@@ -20,7 +20,7 @@ function on_input(self, action_id, action)
   end
 
   local group = ui.group("group", function()
-    ui.button("back", action_id, action, function()
+    ui.button("back", nil, action_id, action, function()
       navigation.popup_pop()
     end)
   end)

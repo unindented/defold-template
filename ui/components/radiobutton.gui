@@ -3,6 +3,10 @@ fonts {
   name: "label"
   font: "/ui/fonts/label.font"
 }
+textures {
+  name: "ui"
+  texture: "/ui/images/ui.atlas"
+}
 background_color {
   x: 0.0
   y: 0.0
@@ -11,7 +15,7 @@ background_color {
 }
 nodes {
   position {
-    x: 0.0
+    x: -30.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -29,26 +33,26 @@ nodes {
     w: 1.0
   }
   size {
-    x: 300.0
-    y: 4.0
+    x: 360.0
+    y: 58.0
     z: 0.0
     w: 1.0
   }
   color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
+    x: 0.0
+    y: 0.0
+    z: 0.0
     w: 1.0
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: ""
-  id: "bounds"
+  id: "clickable"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_W
   adjust_mode: ADJUST_MODE_FIT
-  layer: "ui"
+  layer: ""
   inherit_alpha: true
   slice9 {
     x: 0.0
@@ -59,14 +63,14 @@ nodes {
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
   clipping_inverted: false
-  alpha: 1.0
+  alpha: 0.0
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
 }
 nodes {
   position {
-    x: 285.0
+    x: 30.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -84,8 +88,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 30.0
-    y: 30.0
+    x: 40.0
+    y: 40.0
     z: 0.0
     w: 1.0
   }
@@ -97,15 +101,15 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: ""
-  id: "handle"
+  texture: "ui/radiobutton_normal"
+  id: "box"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  parent: "bounds"
+  parent: "clickable"
   layer: "button"
-  inherit_alpha: true
+  inherit_alpha: false
   slice9 {
     x: 0.0
     y: 0.0
@@ -122,8 +126,8 @@ nodes {
 }
 nodes {
   position {
-    x: 0.0
-    y: 40.0
+    x: 65.0
+    y: 2.0
     z: 0.0
     w: 1.0
   }
@@ -140,8 +144,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
-    y: 80.0
+    x: 285.0
+    y: 48.0
     z: 0.0
     w: 1.0
   }
@@ -173,8 +177,9 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
+  parent: "clickable"
   layer: "text"
-  inherit_alpha: true
+  inherit_alpha: false
   alpha: 1.0
   outline_alpha: 1.0
   shadow_alpha: 1.0
@@ -182,72 +187,6 @@ nodes {
   text_leading: 1.0
   text_tracking: 0.0
   custom_type: 0
-}
-nodes {
-  position {
-    x: 300.0
-    y: 40.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 100.0
-    y: 80.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
-  text: "0"
-  font: "label"
-  id: "value"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_E
-  outline {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  shadow {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
-  layer: "text"
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-}
-layers {
-  name: "ui"
 }
 layers {
   name: "button"

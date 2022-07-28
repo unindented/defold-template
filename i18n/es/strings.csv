@@ -1,4 +1,7 @@
 Original,Translation,Location,Notes
+English,Inglés,Language list,Label
+Español,Español,Language list,Label
+Français,Francés,Language list,Label
 Play,Jugar,Title screen,Button
 Settings,Opciones,Title screen,Button
 Credits,Créditos,Title screen,Button
@@ -8,6 +11,8 @@ Sound,Sonido,Settings menu,Button / Heading
 Gameplay,Jugabilidad,Settings menu,Button / Heading
 Language,Idioma,Settings menu,Button / Heading
 Go back,Ir atrás,Settings menu,Button
+Reduce motion,Reducir movimiento,Display settings menu,Checkbox
+Disable shaders,Deshabilitar shaders,Display settings menu,Checkbox
 Main volume,Volumen principal,Sound settings menu,Slider
 Music volume,Música,Sound settings menu,Slider
 Effects volume,Efectos,Sound settings menu,Slider

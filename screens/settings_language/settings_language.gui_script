@@ -1,12 +1,21 @@
 local actions = require("modules.actions")
+local i18n = require("modules.i18n")
 local navigation = require("modules.navigation")
 local ui = require("ui.ui")
+
+local radiobutton_config = { native_language = true, text_transform = i18n.get_language_label }
 
 function init(self)
   ui.acquire_input()
   ui.set_render_order_popup_content()
 
+  local current_language = i18n.get_language()
+  local language_list = i18n.get_language_list()
+
   ui.heading("heading")
+  for _, language in ipairs(language_list) do
+    ui.radiobutton(language, radiobutton_config).set_selected(current_language == language)
+  end
   ui.button("back")
 
   self.root = gui.get_node("root")
@@ -20,7 +29,13 @@ function on_input(self, action_id, action)
   end
 
   local group = ui.group("group", function()
-    ui.button("back", action_id, action, function()
+    ui.radiogroup("languages", action_id, action, function(group_id, action_id, action)
+      ui.radiobutton("en", radiobutton_config, group_id, action_id, action, function() end)
+      ui.radiobutton("es", radiobutton_config, group_id, action_id, action, function() end)
+      ui.radiobutton("fr", radiobutton_config, group_id, action_id, action, function() end)
+    end)
+
+    ui.button("back", nil, action_id, action, function()
       navigation.popup_pop()
     end)
   end)

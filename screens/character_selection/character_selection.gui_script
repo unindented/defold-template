@@ -20,10 +20,10 @@ function on_input(self, action_id, action)
   end
 
   local group = ui.group("group", function()
-    ui.button("title", action_id, action, function()
+    ui.button("title", nil, action_id, action, function()
       navigation.screen_show(screens.TITLE)
     end)
-    ui.button("start", action_id, action, function()
+    ui.button("start", nil, action_id, action, function()
       navigation.screen_replace(screens.OVERWORLD)
     end)
   end)

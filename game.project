@@ -32,10 +32,12 @@ app_icon = /assets/windows/icon.ico
 app_icon = /assets/macos/icon.icns
 bundle_identifier = org.unindented.template
 bundle_version = 0.0.0-development
+localizations = en,es,fr
 
 [ios]
 bundle_identifier = org.unindented.template
 bundle_version = 0.0.0-development
+localizations = en,es,fr
 
 [android]
 package = org.unindented.template
