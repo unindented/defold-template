@@ -1,5 +1,43 @@
 local M = {}
 
+--- Returns true if a string begins with the characters of a specified string.
+--- @param str string String to search
+--- @param search string String to be searched for
+--- @return boolean
+function M.starts_with(str, search)
+  return string.sub(str, 1, #search) == search
+end
+
+--- Returns true if a string ends with the characters of a specified string.
+--- @param str string String to search
+--- @param search string String to be searched for
+--- @return boolean
+function M.ends_with(str, search)
+  return search == "" or string.sub(str, -#search) == search
+end
+
+--- Return a new array populated with the results of calling a function on every element in the
+--- original array.
+--- @param array table Array
+--- @param func function Function to apply
+--- @return table
+function M.map(array, func)
+  local result = {}
+  for i, v in ipairs(array) do
+    result[i] = func(v)
+  end
+  return result
+end
+
+--- Return a function that ignores its first argument.
+--- @param func function Function
+--- @return function
+function M.ignore_self(func)
+  return function(self, ...)
+    return func(...)
+  end
+end
+
 --- Return version information.
 --- @return string
 function M.version()

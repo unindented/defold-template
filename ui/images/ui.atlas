@@ -1,5 +1,5 @@
 images {
-  image: "/ui/images/button_normal.png"
+  image: "/ui/images/button_default.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
@@ -7,7 +7,7 @@ images {
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/ui/images/checkbox_normal.png"
+  image: "/ui/images/checkbox_default.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
@@ -15,23 +15,31 @@ images {
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/ui/images/checkbox_checked.png"
+  image: "/ui/images/checkbox_selected.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/ui/images/radiobutton_normal.png"
+  image: "/ui/images/radio_default.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/ui/images/radiobutton_pressed.png"
+  image: "/ui/images/radio_pressed.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/ui/images/radiobutton_selected.png"
+  image: "/ui/images/radio_selected.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/ui/images/slider_normal.png"
+  image: "/ui/images/slider_default.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/ui/images/background_default.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/ui/images/background_hover.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 margin: 0

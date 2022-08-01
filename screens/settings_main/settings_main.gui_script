@@ -1,50 +1,42 @@
 local actions = require("modules.actions")
-local messages = require("modules.messages")
 local navigation = require("modules.navigation")
 local screens = require("modules.screens")
+local utils = require("modules.utils")
 local ui = require("ui.ui")
 
 function init(self)
-  ui.acquire_input()
   ui.set_render_order_popup_content()
 
-  ui.heading("heading")
-  ui.button("display")
-  ui.button("sound")
-  ui.button("gameplay")
-  ui.button("language")
-  ui.button("back")
+  self.ui = ui.with(self, function(f)
+    local popup_push = utils.ignore_self(navigation.popup_push)
 
-  self.root = gui.get_node("root")
-  self.transition = navigation.transition_popup(self.root)
+    f:new_custom_heading("heading")
+    f:new_custom_button("button_display", popup_push, screens.SETTINGS_DISPLAY)
+    f:new_custom_button("button_sound", popup_push, screens.SETTINGS_SOUND)
+    f:new_custom_button("button_gameplay", popup_push, screens.SETTINGS_GAMEPLAY)
+    f:new_custom_button("button_language", popup_push, screens.SETTINGS_LANGUAGE)
+    f:new_custom_button("button_back", navigation.popup_pop)
+
+    f:new_back_handler(navigation.popup_pop)
+    f:new_hotkey({ actions.KEY_ESC }, navigation.popup_pop_all)
+  end)
+
+  self.transition = navigation.transition_popup(gui.get_node("root"))
+end
+
+function final(self)
+  self.ui:final()
+end
+
+function update(self, dt)
+  self.ui:update(dt)
 end
 
 function on_input(self, action_id, action)
-  if action_id == actions.ESCAPE and action.released then
-    navigation.popup_pop()
-    return true
-  end
-
-  local group = ui.group("group", function()
-    ui.button("display", nil, action_id, action, function()
-      navigation.popup_push(screens.SETTINGS_DISPLAY)
-    end)
-    ui.button("sound", nil, action_id, action, function()
-      navigation.popup_push(screens.SETTINGS_SOUND)
-    end)
-    ui.button("gameplay", nil, action_id, action, function()
-      navigation.popup_push(screens.SETTINGS_GAMEPLAY)
-    end)
-    ui.button("language", nil, action_id, action, function()
-      navigation.popup_push(screens.SETTINGS_LANGUAGE)
-    end)
-    ui.button("back", nil, action_id, action, function()
-      navigation.popup_pop()
-    end)
-  end)
-  return group.consumed
+  return self.ui:on_input(action_id, action)
 end
 
 function on_message(self, message_id, message, sender)
+  self.ui:on_message(message_id, message, sender)
   self.transition.handle(message_id, message, sender)
 end

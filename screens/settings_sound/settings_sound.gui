@@ -43,7 +43,7 @@ nodes {
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_SW
-  adjust_mode: ADJUST_MODE_STRETCH
+  adjust_mode: ADJUST_MODE_FIT
   layer: "ui"
   inherit_alpha: true
   slice9 {
@@ -97,7 +97,7 @@ nodes {
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/ui/components/heading.gui"
+  template: "/ui/templates/heading.gui"
   template_node_child: false
   custom_type: 0
 }
@@ -134,11 +134,11 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Sound"
+  text: "button_sound"
   font: "label"
   id: "heading/text"
   xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_TOP
+  yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   outline {
     x: 1.0
@@ -161,7 +161,6 @@ nodes {
   outline_alpha: 1.0
   shadow_alpha: 1.0
   overridden_fields: 8
-  overridden_fields: 13
   template_node_child: true
   text_leading: 1.0
   text_tracking: 0.0
@@ -169,7 +168,7 @@ nodes {
 }
 nodes {
   position {
-    x: 650.0
+    x: 800.0
     y: 570.0
     z: 0.0
     w: 1.0
@@ -199,13 +198,69 @@ nodes {
     w: 1.0
   }
   type: TYPE_TEMPLATE
-  id: "master_volume"
+  id: "slider_master_volume"
   parent: "root"
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/ui/components/slider.gui"
+  template: "/ui/templates/slider.gui"
   template_node_child: false
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 320.0
+    y: 50.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "ui/background_default"
+  id: "slider_master_volume/input"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "slider_master_volume"
+  layer: "ui"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: true
+  size_mode: SIZE_MODE_MANUAL
   custom_type: 0
 }
 nodes {
@@ -242,12 +297,12 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: ""
-  id: "master_volume/bounds"
+  id: "slider_master_volume/track"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
-  pivot: PIVOT_W
+  pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  parent: "master_volume"
+  parent: "slider_master_volume/input"
   layer: "ui"
   inherit_alpha: true
   slice9 {
@@ -266,7 +321,7 @@ nodes {
 }
 nodes {
   position {
-    x: 285.0
+    x: -135.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -297,20 +352,20 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: ""
-  id: "master_volume/handle"
+  texture: "ui/slider_default"
+  id: "slider_master_volume/handle"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  parent: "master_volume/bounds"
+  parent: "slider_master_volume/input"
   layer: "button"
   inherit_alpha: true
   slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
+    x: 10.0
+    y: 10.0
+    z: 10.0
+    w: 10.0
   }
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
@@ -322,7 +377,7 @@ nodes {
 }
 nodes {
   position {
-    x: 0.0
+    x: -150.0
     y: 40.0
     z: 0.0
     w: 1.0
@@ -353,9 +408,9 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Main volume"
+  text: "slider_master_volume"
   font: "label"
-  id: "master_volume/text"
+  id: "slider_master_volume/text"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_W
@@ -373,7 +428,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "master_volume"
+  parent: "slider_master_volume"
   layer: "text"
   inherit_alpha: true
   alpha: 1.0
@@ -387,7 +442,7 @@ nodes {
 }
 nodes {
   position {
-    x: 300.0
+    x: 150.0
     y: 40.0
     z: 0.0
     w: 1.0
@@ -420,7 +475,7 @@ nodes {
   blend_mode: BLEND_MODE_ALPHA
   text: "0"
   font: "label"
-  id: "master_volume/value"
+  id: "slider_master_volume/value"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_E
@@ -438,7 +493,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "master_volume"
+  parent: "slider_master_volume"
   layer: "text"
   inherit_alpha: true
   alpha: 1.0
@@ -451,8 +506,8 @@ nodes {
 }
 nodes {
   position {
-    x: 650.0
-    y: 450.0
+    x: 800.0
+    y: 470.0
     z: 0.0
     w: 1.0
   }
@@ -481,13 +536,69 @@ nodes {
     w: 1.0
   }
   type: TYPE_TEMPLATE
-  id: "music_volume"
+  id: "slider_music_volume"
   parent: "root"
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/ui/components/slider.gui"
+  template: "/ui/templates/slider.gui"
   template_node_child: false
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 320.0
+    y: 50.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "ui/background_default"
+  id: "slider_music_volume/input"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "slider_music_volume"
+  layer: "ui"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: true
+  size_mode: SIZE_MODE_MANUAL
   custom_type: 0
 }
 nodes {
@@ -524,12 +635,12 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: ""
-  id: "music_volume/bounds"
+  id: "slider_music_volume/track"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
-  pivot: PIVOT_W
+  pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  parent: "music_volume"
+  parent: "slider_music_volume/input"
   layer: "ui"
   inherit_alpha: true
   slice9 {
@@ -548,7 +659,7 @@ nodes {
 }
 nodes {
   position {
-    x: 285.0
+    x: -135.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -579,20 +690,20 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: ""
-  id: "music_volume/handle"
+  texture: "ui/slider_default"
+  id: "slider_music_volume/handle"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  parent: "music_volume/bounds"
+  parent: "slider_music_volume/input"
   layer: "button"
   inherit_alpha: true
   slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
+    x: 10.0
+    y: 10.0
+    z: 10.0
+    w: 10.0
   }
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
@@ -604,7 +715,7 @@ nodes {
 }
 nodes {
   position {
-    x: 0.0
+    x: -150.0
     y: 40.0
     z: 0.0
     w: 1.0
@@ -635,9 +746,9 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Music volume"
+  text: "slider_music_volume"
   font: "label"
-  id: "music_volume/text"
+  id: "slider_music_volume/text"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_W
@@ -655,7 +766,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "music_volume"
+  parent: "slider_music_volume"
   layer: "text"
   inherit_alpha: true
   alpha: 1.0
@@ -669,7 +780,7 @@ nodes {
 }
 nodes {
   position {
-    x: 300.0
+    x: 150.0
     y: 40.0
     z: 0.0
     w: 1.0
@@ -702,7 +813,7 @@ nodes {
   blend_mode: BLEND_MODE_ALPHA
   text: "0"
   font: "label"
-  id: "music_volume/value"
+  id: "slider_music_volume/value"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_E
@@ -720,7 +831,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "music_volume"
+  parent: "slider_music_volume"
   layer: "text"
   inherit_alpha: true
   alpha: 1.0
@@ -733,8 +844,8 @@ nodes {
 }
 nodes {
   position {
-    x: 650.0
-    y: 350.0
+    x: 800.0
+    y: 370.0
     z: 0.0
     w: 1.0
   }
@@ -763,13 +874,69 @@ nodes {
     w: 1.0
   }
   type: TYPE_TEMPLATE
-  id: "effects_volume"
+  id: "slider_effects_volume"
   parent: "root"
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/ui/components/slider.gui"
+  template: "/ui/templates/slider.gui"
   template_node_child: false
+  custom_type: 0
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 320.0
+    y: 50.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "ui/background_default"
+  id: "slider_effects_volume/input"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "slider_effects_volume"
+  layer: "ui"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: true
+  size_mode: SIZE_MODE_MANUAL
   custom_type: 0
 }
 nodes {
@@ -806,12 +973,12 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: ""
-  id: "effects_volume/bounds"
+  id: "slider_effects_volume/track"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
-  pivot: PIVOT_W
+  pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  parent: "effects_volume"
+  parent: "slider_effects_volume/input"
   layer: "ui"
   inherit_alpha: true
   slice9 {
@@ -830,7 +997,7 @@ nodes {
 }
 nodes {
   position {
-    x: 285.0
+    x: -135.0
     y: 0.0
     z: 0.0
     w: 1.0
@@ -861,20 +1028,20 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: ""
-  id: "effects_volume/handle"
+  texture: "ui/slider_default"
+  id: "slider_effects_volume/handle"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  parent: "effects_volume/bounds"
+  parent: "slider_effects_volume/input"
   layer: "button"
   inherit_alpha: true
   slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
+    x: 10.0
+    y: 10.0
+    z: 10.0
+    w: 10.0
   }
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
@@ -886,7 +1053,7 @@ nodes {
 }
 nodes {
   position {
-    x: 0.0
+    x: -150.0
     y: 40.0
     z: 0.0
     w: 1.0
@@ -917,9 +1084,9 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Effects volume"
+  text: "slider_effects_volume"
   font: "label"
-  id: "effects_volume/text"
+  id: "slider_effects_volume/text"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_W
@@ -937,7 +1104,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "effects_volume"
+  parent: "slider_effects_volume"
   layer: "text"
   inherit_alpha: true
   alpha: 1.0
@@ -951,7 +1118,7 @@ nodes {
 }
 nodes {
   position {
-    x: 300.0
+    x: 150.0
     y: 40.0
     z: 0.0
     w: 1.0
@@ -984,7 +1151,7 @@ nodes {
   blend_mode: BLEND_MODE_ALPHA
   text: "0"
   font: "label"
-  id: "effects_volume/value"
+  id: "slider_effects_volume/value"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_E
@@ -1002,7 +1169,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "effects_volume"
+  parent: "slider_effects_volume"
   layer: "text"
   inherit_alpha: true
   alpha: 1.0
@@ -1045,12 +1212,12 @@ nodes {
     w: 1.0
   }
   type: TYPE_TEMPLATE
-  id: "back"
+  id: "button_back"
   parent: "root"
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/ui/components/button.gui"
+  template: "/ui/templates/button.gui"
   template_node_child: false
   custom_type: 0
 }
@@ -1087,13 +1254,13 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "ui/button_normal"
-  id: "back/button"
+  texture: "ui/button_default"
+  id: "button_back/button"
   xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_BOTTOM
+  yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  parent: "back"
+  parent: "button_back"
   layer: "button"
   inherit_alpha: true
   slice9 {
@@ -1106,7 +1273,6 @@ nodes {
   clipping_visible: true
   clipping_inverted: false
   alpha: 1.0
-  overridden_fields: 13
   template_node_child: true
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
@@ -1144,9 +1310,9 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "Go back"
+  text: "button_back"
   font: "label"
-  id: "back/text"
+  id: "button_back/text"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -1164,7 +1330,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "back/button"
+  parent: "button_back/button"
   layer: "text"
   inherit_alpha: true
   alpha: 1.0

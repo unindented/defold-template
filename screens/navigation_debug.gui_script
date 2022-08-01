@@ -1,16 +1,26 @@
 local navigation = require("modules.navigation")
-local utils = require("modules.utils")
 local ui = require("ui.ui")
 
 function init(self)
   ui.set_render_order_debug()
 
-  self.debug_text = gui.get_node("debug/text")
-  gui.set_enabled(self.debug_text, utils.is_debug())
+  self.ui = ui.with(self, function(f)
+    f:new_custom_debug("debug", navigation.dump_stack)
+  end)
+end
+
+function final(self)
+  self.ui:final()
 end
 
 function update(self, dt)
-  if gui.is_enabled(self.debug_text) then
-    gui.set_text(self.debug_text, navigation.dump_stack())
-  end
+  self.ui:update(dt)
+end
+
+function on_input(self, action_id, action)
+  return self.ui:on_input(action_id, action)
+end
+
+function on_message(self, message_id, message, sender)
+  self.ui:on_message(message_id, message, sender)
 end

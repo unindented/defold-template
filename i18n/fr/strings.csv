@@ -1,22 +1,22 @@
-Original,Translation,Location,Notes
-English,Anglais,Language list,Label
-Español,Espagnol,Language list,Label
-Français,Français,Language list,Label
-Play,Jouer,Title screen,Button
-Settings,Réglages,Title screen,Button
-Credits,Crédits,Title screen,Button
-Quit,Quitter,Title screen,Button
-Display,Affichage,Settings menu,Button / Heading
-Sound,Son,Settings menu,Button / Heading
-Gameplay,Jouabilité,Settings menu,Button / Heading
-Language,Changer langue,Settings menu,Button / Heading
-Go back,Retour,Settings menu,Button
-Reduce motion,Réduire le mouvement,Display settings menu,Checkbox
-Disable shaders,Désactiver les shaders,Display settings menu,Checkbox
-Main volume,Volume principal,Sound settings menu,Slider
-Music volume,Volume musique,Sound settings menu,Slider
-Effects volume,Volume bruitages,Sound settings menu,Slider
-Back to title,Retour au titre,Pause menu,Button
-Continue,Continuer,Pause menu,Button
-Title,Titre,Character selection screen,Button
-Start,Lancer,Character selection screen,Button
+Key,Translation,Location,Notes
+language_en,English (Anglais),Language list,Label
+language_es,Español (Espagnol),Language list,Label
+language_fr,Français,Language list,Label
+button_play,Jouer,Title screen,Button
+button_settings,Réglages,Title screen,Button
+button_credits,Crédits,Title screen,Button
+button_quit,Quitter,Title screen,Button
+button_display,Affichage,Settings menu,Button / Heading
+button_sound,Son,Settings menu,Button / Heading
+button_gameplay,Jouabilité,Settings menu,Button / Heading
+button_language,Changer langue,Settings menu,Button / Heading
+button_back,Retour,Settings menu,Button
+checkbox_reduce_motion,Réduire le mouvement,Display settings menu,Checkbox
+checkbox_disable_shaders,Désactiver les shaders,Display settings menu,Checkbox
+slider_master_volume,Volume principal,Sound settings menu,Slider
+slider_music_volume,Volume musique,Sound settings menu,Slider
+slider_effects_volume,Volume bruitages,Sound settings menu,Slider
+button_continue,Continuer,Pause menu,Button
+button_back_to_title,Retour au titre,Pause menu,Button
+button_title,Titre,Character selection screen,Button
+button_start,Lancer,Character selection screen,Button

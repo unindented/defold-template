@@ -4,11 +4,9 @@ local screens = require("modules.screens")
 local ui = require("ui.ui")
 
 function init(self)
-  ui.acquire_input()
   ui.set_render_order_popup_overlay()
 
-  self.root = gui.get_node("root")
-  self.transition = navigation.transition_popup(self.root)
+  self.transition = navigation.transition_popup(gui.get_node("root"))
 
   msg.post("#", messages.SHOW_FIRST_SCREEN)
 end

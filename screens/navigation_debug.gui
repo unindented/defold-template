@@ -41,7 +41,7 @@ nodes {
   layer: "ui"
   inherit_alpha: true
   alpha: 1.0
-  template: "/ui/components/debug.gui"
+  template: "/ui/templates/debug.gui"
   template_node_child: false
   custom_type: 0
 }
@@ -81,8 +81,8 @@ nodes {
   text: "<debug info>"
   font: "label"
   id: "debug/text"
-  xanchor: XANCHOR_LEFT
-  yanchor: YANCHOR_BOTTOM
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
   pivot: PIVOT_SW
   outline {
     x: 1.0
@@ -105,8 +105,6 @@ nodes {
   outline_alpha: 1.0
   shadow_alpha: 1.0
   overridden_fields: 8
-  overridden_fields: 12
-  overridden_fields: 13
   overridden_fields: 14
   template_node_child: true
   text_leading: 1.0

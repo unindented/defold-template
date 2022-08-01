@@ -43,7 +43,7 @@ nodes {
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_SW
-  adjust_mode: ADJUST_MODE_STRETCH
+  adjust_mode: ADJUST_MODE_FIT
   layer: "ui"
   inherit_alpha: true
   slice9 {
@@ -97,7 +97,7 @@ nodes {
   layer: "background"
   inherit_alpha: true
   alpha: 1.0
-  template: "/ui/components/overlay.gui"
+  template: "/ui/templates/overlay.gui"
   template_node_child: false
   custom_type: 0
 }

@@ -1,31 +1,36 @@
 local actions = require("modules.actions")
+local jukebox = require("modules.jukebox")
 local navigation = require("modules.navigation")
 local screens = require("modules.screens")
-local sfx = require("modules.sfx")
+local utils = require("modules.utils")
 local ui = require("ui.ui")
 
 function init(self)
-  ui.acquire_input()
+  self.ui = ui.with(self, function(f)
+    local screen_show = utils.ignore_self(navigation.screen_show)
+    local screen_replace = utils.ignore_self(navigation.screen_replace)
 
-  ui.button("title")
-  ui.button("start")
+    f:new_custom_button("button_title", screen_show, screens.TITLE)
+    f:new_custom_button("button_start", screen_replace, screens.OVERWORLD)
 
-  sfx.play_music("overworld")
+    f:new_hotkey({ actions.KEY_ESC }, screen_show, screens.PAUSE)
+  end)
+
+  jukebox.play_music("overworld")
+end
+
+function final(self)
+  self.ui:final()
+end
+
+function update(self, dt)
+  self.ui:update(dt)
 end
 
 function on_input(self, action_id, action)
-  if action_id == actions.ESCAPE and action.released then
-    navigation.screen_show(screens.PAUSE)
-    return true
-  end
+  return self.ui:on_input(action_id, action)
+end
 
-  local group = ui.group("group", function()
-    ui.button("title", nil, action_id, action, function()
-      navigation.screen_show(screens.TITLE)
-    end)
-    ui.button("start", nil, action_id, action, function()
-      navigation.screen_replace(screens.OVERWORLD)
-    end)
-  end)
-  return group.consumed
+function on_message(self, message_id, message, sender)
+  self.ui:on_message(message_id, message, sender)
 end

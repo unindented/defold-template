@@ -71,6 +71,14 @@ function M.popup_pop()
   end
 end
 
+--- Pop all popup-on-popup screens from the navigation stack.
+function M.popup_pop_all()
+  -- pop the current popup...
+  monarch.back()
+  -- ... and the overlay
+  monarch.back()
+end
+
 --- Enable verbose logging.
 function M.debug()
   monarch.debug()

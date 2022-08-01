@@ -1,4 +1,3 @@
 return {
-  ESCAPE = hash("escape"),
-  TOUCH = hash("touch"),
+  KEY_ESC = "key_esc",
 }

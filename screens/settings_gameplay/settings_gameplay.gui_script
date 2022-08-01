@@ -3,30 +3,32 @@ local navigation = require("modules.navigation")
 local ui = require("ui.ui")
 
 function init(self)
-  ui.acquire_input()
   ui.set_render_order_popup_content()
 
-  ui.heading("heading")
-  ui.button("back")
+  self.ui = ui.with(self, function(f)
+    f:new_custom_heading("heading")
+    f:new_custom_button("button_back", navigation.popup_pop)
 
-  self.root = gui.get_node("root")
-  self.transition = navigation.transition_popup(self.root)
+    f:new_back_handler(navigation.popup_pop)
+    f:new_hotkey({ actions.KEY_ESC }, navigation.popup_pop_all)
+  end)
+
+  self.transition = navigation.transition_popup(gui.get_node("root"))
+end
+
+function final(self)
+  self.ui:final()
+end
+
+function update(self, dt)
+  self.ui:update(dt)
 end
 
 function on_input(self, action_id, action)
-  if action_id == actions.ESCAPE and action.released then
-    navigation.popup_pop()
-    return true
-  end
-
-  local group = ui.group("group", function()
-    ui.button("back", nil, action_id, action, function()
-      navigation.popup_pop()
-    end)
-  end)
-  return group.consumed
+  return self.ui:on_input(action_id, action)
 end
 
 function on_message(self, message_id, message, sender)
+  self.ui:on_message(message_id, message, sender)
   self.transition.handle(message_id, message, sender)
 end

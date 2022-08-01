@@ -1,22 +1,22 @@
-Original,Translation,Location,Notes
-English,Inglés,Language list,Label
-Español,Español,Language list,Label
-Français,Francés,Language list,Label
-Play,Jugar,Title screen,Button
-Settings,Opciones,Title screen,Button
-Credits,Créditos,Title screen,Button
-Quit,Salir,Title screen,Button
-Display,Pantalla,Settings menu,Button / Heading
-Sound,Sonido,Settings menu,Button / Heading
-Gameplay,Jugabilidad,Settings menu,Button / Heading
-Language,Idioma,Settings menu,Button / Heading
-Go back,Ir atrás,Settings menu,Button
-Reduce motion,Reducir movimiento,Display settings menu,Checkbox
-Disable shaders,Deshabilitar shaders,Display settings menu,Checkbox
-Main volume,Volumen principal,Sound settings menu,Slider
-Music volume,Música,Sound settings menu,Slider
-Effects volume,Efectos,Sound settings menu,Slider
-Back to title,Menú principal,Pause menu,Button
-Continue,Continuar,Pause menu,Button
-Title,Título,Character selection screen,Button
-Start,Comenzar,Character selection screen,Button
+Key,Translation,Location,Notes
+language_en,English (Inglés),Language list,Label
+language_es,Español,Language list,Label
+language_fr,Français (Francés),Language list,Label
+button_play,Jugar,Title screen,Button
+button_settings,Opciones,Title screen,Button
+button_credits,Créditos,Title screen,Button
+button_quit,Salir,Title screen,Button
+button_display,Pantalla,Settings menu,Button / Heading
+button_sound,Sonido,Settings menu,Button / Heading
+button_gameplay,Jugabilidad,Settings menu,Button / Heading
+button_language,Idioma,Settings menu,Button / Heading
+button_back,Ir atrás,Settings menu,Button
+checkbox_reduce_motion,Reducir movimiento,Display settings menu,Checkbox
+checkbox_disable_shaders,Deshabilitar shaders,Display settings menu,Checkbox
+slider_master_volume,Volumen principal,Sound settings menu,Slider
+slider_music_volume,Música,Sound settings menu,Slider
+slider_effects_volume,Efectos,Sound settings menu,Slider
+button_continue,Continuar,Pause menu,Button
+button_back_to_title,Menú principal,Pause menu,Button
+button_title,Título,Character selection screen,Button
+button_start,Comenzar,Character selection screen,Button

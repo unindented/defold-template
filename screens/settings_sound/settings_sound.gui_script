@@ -1,48 +1,46 @@
 local actions = require("modules.actions")
+local jukebox = require("modules.jukebox")
 local navigation = require("modules.navigation")
+local utils = require("modules.utils")
 local ui = require("ui.ui")
 
 function init(self)
-  ui.acquire_input()
   ui.set_render_order_popup_content()
 
-  local master_volume = sound.get_group_gain(hash("master"))
-  local music_volume = sound.get_group_gain(hash("music"))
-  local effects_volume = sound.get_group_gain(hash("effects"))
+  self.ui = ui.with(self, function(f)
+    local master_volume = jukebox.get_master_volume()
+    local music_volume = jukebox.get_music_volume()
+    local effects_volume = jukebox.get_effects_volume()
+    local set_master_volume = utils.ignore_self(jukebox.set_master_volume)
+    local set_music_volume = utils.ignore_self(jukebox.set_music_volume)
+    local set_effects_volume = utils.ignore_self(jukebox.set_effects_volume)
 
-  ui.heading("heading")
-  ui.slider("master_volume").scroll_to(1 - master_volume, 0)
-  ui.slider("music_volume").scroll_to(1 - music_volume, 0)
-  ui.slider("effects_volume").scroll_to(1 - effects_volume, 0)
-  ui.button("back")
+    f:new_custom_heading("heading")
+    f:new_custom_slider("slider_master_volume", master_volume, set_master_volume)
+    f:new_custom_slider("slider_music_volume", music_volume, set_music_volume)
+    f:new_custom_slider("slider_effects_volume", effects_volume, set_effects_volume)
+    f:new_custom_button("button_back", navigation.popup_pop)
 
-  self.root = gui.get_node("root")
-  self.transition = navigation.transition_popup(self.root)
+    f:new_back_handler(navigation.popup_pop)
+    f:new_hotkey({ actions.KEY_ESC }, navigation.popup_pop_all)
+  end)
+
+  self.transition = navigation.transition_popup(gui.get_node("root"))
+end
+
+function final(self)
+  self.ui:final()
+end
+
+function update(self, dt)
+  self.ui:update(dt)
 end
 
 function on_input(self, action_id, action)
-  if action_id == actions.ESCAPE and action.released then
-    navigation.popup_pop()
-    return true
-  end
-
-  local group = ui.group("group", function()
-    ui.slider("master_volume", nil, action_id, action, function(slider)
-      sound.set_group_gain(hash("master"), 1 - slider.scroll.x)
-    end)
-    ui.slider("music_volume", nil, action_id, action, function(slider)
-      sound.set_group_gain(hash("music"), 1 - slider.scroll.x)
-    end)
-    ui.slider("effects_volume", nil, action_id, action, function(slider)
-      sound.set_group_gain(hash("effects"), 1 - slider.scroll.x)
-    end)
-    ui.button("back", nil, action_id, action, function()
-      navigation.popup_pop()
-    end)
-  end)
-  return group.consumed
+  return self.ui:on_input(action_id, action)
 end
 
 function on_message(self, message_id, message, sender)
+  self.ui:on_message(message_id, message, sender)
   self.transition.handle(message_id, message, sender)
 end

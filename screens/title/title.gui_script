@@ -1,40 +1,37 @@
 local actions = require("modules.actions")
+local jukebox = require("modules.jukebox")
 local navigation = require("modules.navigation")
 local screens = require("modules.screens")
 local utils = require("modules.utils")
 local ui = require("ui.ui")
-local sfx = require("modules.sfx")
 
 function init(self)
-  ui.acquire_input()
+  self.ui = ui.with(self, function(f)
+    local screen_show = utils.ignore_self(navigation.screen_show)
 
-  ui.button("play", { primary = true })
-  ui.button("settings", { primary = true })
-  ui.button("credits", { primary = true })
-  ui.button("quit", { primary = true })
+    f:new_custom_button_primary("button_play", screen_show, screens.CHARACTER_SELECTION)
+    f:new_custom_button_primary("button_settings", screen_show, screens.SETTINGS)
+    f:new_custom_button_primary("button_credits", screen_show, screens.CREDITS)
+    f:new_custom_button_primary_silent("button_quit", utils.quit)
 
-  sfx.play_music("title")
+    f:new_hotkey({ actions.KEY_ESC }, screen_show, screens.SETTINGS)
+  end)
+
+  jukebox.play_music("title")
+end
+
+function final(self)
+  self.ui:final()
+end
+
+function update(self, dt)
+  self.ui:update(dt)
 end
 
 function on_input(self, action_id, action)
-  if action_id == actions.ESCAPE and action.released then
-    navigation.screen_show(screens.SETTINGS)
-    return true
-  end
+  return self.ui:on_input(action_id, action)
+end
 
-  local group = ui.group("group", function()
-    ui.button("play", { primary = true }, action_id, action, function()
-      navigation.screen_show(screens.CHARACTER_SELECTION)
-    end)
-    ui.button("settings", { primary = true }, action_id, action, function()
-      navigation.screen_show(screens.SETTINGS)
-    end)
-    ui.button("credits", { primary = true }, action_id, action, function()
-      navigation.screen_show(screens.CREDITS)
-    end)
-    ui.button("quit", { primary = true, silent = true }, action_id, action, function()
-      utils.quit()
-    end)
-  end)
-  return group.consumed
+function on_message(self, message_id, message, sender)
+  self.ui:on_message(message_id, message, sender)
 end

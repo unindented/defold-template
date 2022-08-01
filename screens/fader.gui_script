@@ -4,8 +4,7 @@ local ui = require("ui.ui")
 function init(self)
   ui.set_render_order_fader()
 
-  self.root = gui.get_node("root")
-  self.transition = navigation.transition_screen(self.root)
+  self.transition = navigation.transition_screen(gui.get_node("root"))
 end
 
 function on_message(self, message_id, message, sender)

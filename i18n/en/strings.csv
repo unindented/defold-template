@@ -1,4 +1,22 @@
-Original,Translation,Location,Notes
-English,English,Language list,Label
-Español,Spanish,Language list,Label
-Français,French,Language list,Label
+Key,Translation,Location,Notes
+language_en,English,Language list,Label
+language_es,Español (Spanish),Language list,Label
+language_fr,Français (French),Language list,Label
+button_play,Play,Title screen,Button
+button_settings,Settings,Title screen,Button
+button_credits,Credits,Title screen,Button
+button_quit,Quit,Title screen,Button
+button_display,Display,Settings menu,Button / Heading
+button_sound,Sound,Settings menu,Button / Heading
+button_gameplay,Gameplay,Settings menu,Button / Heading
+button_language,Language,Settings menu,Button / Heading
+button_back,Go back,Settings menu,Button
+checkbox_reduce_motion,Reduce motion,Display settings menu,Checkbox
+checkbox_disable_shaders,Disable shaders,Display settings menu,Checkbox
+slider_master_volume,Main volume,Sound settings menu,Slider
+slider_music_volume,Music volume,Sound settings menu,Slider
+slider_effects_volume,Effects volume,Sound settings menu,Slider
+button_continue,Continue,Pause menu,Button
+button_back_to_title,Back to title,Pause menu,Button
+button_title,Title,Character selection screen,Button
+button_start,Start,Character selection screen,Button
