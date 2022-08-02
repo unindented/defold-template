@@ -1,0 +1,14 @@
+local deftest = require("deftest.deftest")
+local csv_spec = require("test.csv_spec")
+local i18n_spec = require("test.i18n_spec")
+local utf8_spec = require("test.utf8_spec")
+local utils_spec = require("test.utils_spec")
+
+function init(self)
+  deftest.add(csv_spec)
+  deftest.add(i18n_spec)
+  deftest.add(utf8_spec)
+  deftest.add(utils_spec)
+
+  deftest.run({ coverage = { enabled = true } })
+end

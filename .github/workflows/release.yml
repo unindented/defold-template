@@ -44,7 +44,9 @@ jobs:
           STEAM_SSFN_NAME: ${{ secrets.STEAM_SSFN_NAME }}
           STEAM_SSFN_CONTENTS: ${{ secrets.STEAM_SSFN_CONTENTS }}
           STEAM_CONFIG_CONTENTS: ${{ secrets.STEAM_CONFIG_CONTENTS }}
-        run: make release
+        run: |
+          make test
+          make release
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3

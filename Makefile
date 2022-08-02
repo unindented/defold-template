@@ -5,6 +5,7 @@ APP_NAME := Template
 RESOLVE_DIR := .internal
 ASSETS_DIR := assets
 BUILD_DIR := build
+COVERAGE_DIR := coverage
 DIST_DIR := dist
 TOOLS_DIR := tools
 
@@ -73,17 +74,82 @@ release:
 clean:
 	rm -rf "$(RESOLVE_DIR)"
 	rm -rf "$(BUILD_DIR)"
+	rm -rf "$(COVERAGE_DIR)"
 	rm -rf "$(DIST_DIR)"
 	rm -rf manifest.*
+
+.PHONY: test
+test:
+	$(MAKE) resolve
+	$(MAKE) test-macos
+
+.PHONY: run
+run:
+	$(MAKE) resolve
+	$(MAKE) run-macos
 
 .PHONY: all
 all:
 	$(MAKE) version
-	$(MAKE) common
-	$(MAKE) windows
-	$(MAKE) macos
-	$(MAKE) linux
-	$(MAKE) web
+	$(MAKE) resolve
+	$(MAKE) dist-common
+	$(MAKE) dist-windows
+	$(MAKE) dist-macos
+	$(MAKE) dist-linux
+	$(MAKE) dist-web
+
+.PHONY: test-windows
+test-windows: $(BOB_PATH)
+	mkdir -p "$(COVERAGE_DIR)"
+	java -jar "$(BOB_PATH)" \
+		--variant headless \
+		--platform x86_64-win32 \
+		build
+	"$(BUILD_DIR)/x86_64-win32/dmengine.exe" --config="bootstrap.main_collection=/test/test.collectionc"
+
+.PHONY: test-macos
+test-macos: $(BOB_PATH)
+	mkdir -p "$(COVERAGE_DIR)"
+	java -jar "$(BOB_PATH)" \
+		--variant headless \
+		--platform x86_64-darwin \
+		build
+	chmod +x "$(BUILD_DIR)/x86_64-osx/dmengine"
+	"$(BUILD_DIR)/x86_64-osx/dmengine" --config="bootstrap.main_collection=/test/test.collectionc"
+
+.PHONY: test-linux
+test-linux: $(BOB_PATH)
+	mkdir -p "$(COVERAGE_DIR)"
+	java -jar "$(BOB_PATH)" \
+		--variant headless \
+		--platform x86_64-linux \
+		build
+	chmod +x "$(BUILD_DIR)/x86_64-linux/dmengine"
+	"$(BUILD_DIR)/x86_64-linux/dmengine" --config="bootstrap.main_collection=/test/test.collectionc"
+
+.PHONY: run-windows
+run-windows: $(BOB_PATH)
+	java -jar "$(BOB_PATH)" \
+		--platform x86_64-win32 \
+		build
+	"$(BUILD_DIR)/x86_64-win32/dmengine.exe"
+
+.PHONY: run-macos
+run-macos: $(BOB_PATH)
+	java -jar "$(BOB_PATH)" \
+		--platform x86_64-darwin \
+		build
+	chmod +x "$(BUILD_DIR)/x86_64-osx/dmengine"
+	rm "$(BUILD_DIR)/x86_64-osx/Info.plist"
+	"$(BUILD_DIR)/x86_64-osx/dmengine"
+
+.PHONY: run-linux
+run-linux: $(BOB_PATH)
+	java -jar "$(BOB_PATH)" \
+		--platform x86_64-linux \
+		build
+	chmod +x "$(BUILD_DIR)/x86_64-linux/dmengine"
+	"$(BUILD_DIR)/x86_64-linux/dmengine"
 
 .PHONY: version
 version:
@@ -158,11 +224,12 @@ $(STEAM_SSFN_FILE):
 	echo "$(STEAM_SSFN_CONTENTS)" | base64 -d > "$@"
 	chmod 777 "$@"
 
-common: $(RESOLVE_DIR) $(COMMON_DIST_CHANGELOG)
-windows: $(WINDOWS_DIST_ZIP) $(WINDOWS_DIST_APP)
-macos: $(MACOS_DIST_ZIP) $(MACOS_DIST_DMG) $(MACOS_DIST_APP)
-linux: $(LINUX_DIST_ZIP) $(LINUX_DIST_APP)
-web: $(WEB_DIST_ZIP)
+resolve: $(RESOLVE_DIR)
+dist-common: $(COMMON_DIST_CHANGELOG)
+dist-windows: $(WINDOWS_DIST_ZIP) $(WINDOWS_DIST_APP)
+dist-macos: $(MACOS_DIST_ZIP) $(MACOS_DIST_DMG) $(MACOS_DIST_APP)
+dist-linux: $(LINUX_DIST_ZIP) $(LINUX_DIST_APP)
+dist-web: $(WEB_DIST_ZIP)
 
 $(RESOLVE_DIR): $(BOB_PATH)
 	java -jar "$(BOB_PATH)" resolve
@@ -176,7 +243,14 @@ $(WINDOWS_DIST_ZIP): $(WINDOWS_DIST_APP)
 
 $(WINDOWS_DIST_APP): $(WINDOWS_ICON) $(BOB_PATH) $(RCEDIT_PATH)
 	mkdir -p "$(WINDOWS_DIST_DIR)"
-	java -jar "$(BOB_PATH)" --archive --build-report-html "$(WINDOWS_DIST_DIR)/report.html" --bundle-output "$(WINDOWS_DIST_DIR)" --texture-compression true --platform x86_64-win32 distclean build bundle
+	java -jar "$(BOB_PATH)" \
+		--archive \
+		--build-report-html "$(WINDOWS_DIST_DIR)/report.html" \
+		--bundle-output "$(WINDOWS_DIST_DIR)" \
+		--exclude-build-folder test \
+		--texture-compression true \
+		--platform x86_64-win32 \
+		distclean build bundle
 	wine64 "$(RCEDIT_PATH)" "$(WINDOWS_DIST_APP)/$(APP_NAME).exe" --set-file-version "$(APP_VERSION)"
 	wine64 "$(RCEDIT_PATH)" "$(WINDOWS_DIST_APP)/$(APP_NAME).exe" --set-product-version "$(APP_VERSION)"
 
@@ -205,7 +279,14 @@ $(MACOS_DIST_DMG): $(MACOS_UNNOTARIZED_DIST_APP)
 
 $(MACOS_UNNOTARIZED_DIST_APP): $(MACOS_ICON) $(BOB_PATH)
 	mkdir -p "$(MACOS_UNNOTARIZED_DIST_DIR)"
-	java -jar "$(BOB_PATH)" --archive --build-report-html "$(MACOS_UNNOTARIZED_DIST_DIR)/report.html" --bundle-output "$(MACOS_UNNOTARIZED_DIST_DIR)" --texture-compression true --platform x86_64-darwin distclean build bundle
+	java -jar "$(BOB_PATH)" \
+		--archive \
+		--build-report-html "$(MACOS_UNNOTARIZED_DIST_DIR)/report.html" \
+		--bundle-output "$(MACOS_UNNOTARIZED_DIST_DIR)" \
+		--exclude-build-folder test \
+		--texture-compression true \
+		--platform x86_64-darwin \
+		distclean build bundle
 	/usr/bin/codesign -vvv --force --deep --timestamp --options runtime --entitlements "$(MACOS_ASSETS_DIR)/Entitlements.plist" --sign $(MACOS_TEAM_ID) "$@"
 	/usr/bin/codesign -vvvv --deep "$@"
 
@@ -217,14 +298,28 @@ $(LINUX_DIST_ZIP): $(LINUX_DIST_APP)
 
 $(LINUX_DIST_APP): $(BOB_PATH)
 	mkdir -p "$(LINUX_DIST_DIR)"
-	java -jar "$(BOB_PATH)" --archive --build-report-html "$(LINUX_DIST_DIR)/report.html" --bundle-output "$(LINUX_DIST_DIR)" --texture-compression true --platform x86_64-linux distclean build bundle
+	java -jar "$(BOB_PATH)" \
+		--archive \
+		--build-report-html "$(LINUX_DIST_DIR)/report.html" \
+		--bundle-output "$(LINUX_DIST_DIR)" \
+		--exclude-build-folder test \
+		--texture-compression true \
+		--platform x86_64-linux \
+		distclean build bundle
 
 $(WEB_DIST_ZIP): $(WEB_DIST_APP)
 	(cd "$<" && zip -rX "../$(notdir $@)" .)
 
 $(WEB_DIST_APP): $(BOB_PATH)
 	mkdir -p "$(WEB_DIST_DIR)"
-	java -jar "$(BOB_PATH)" --archive --build-report-html "$(WEB_DIST_DIR)/report.html" --bundle-output "$(WEB_DIST_DIR)" --texture-compression true --platform js-web distclean build bundle
+	java -jar "$(BOB_PATH)" \
+		--archive \
+		--build-report-html "$(WEB_DIST_DIR)/report.html" \
+		--bundle-output "$(WEB_DIST_DIR)" \
+		--exclude-build-folder test \
+		--texture-compression true \
+		--platform js-web \
+		distclean build bundle
 
 $(BOB_PATH):
 	curl -L -o /tmp/bob.jar "https://github.com/defold/defold/releases/download/$(BOB_VERSION)/bob.jar"

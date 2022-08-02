@@ -1,0 +1,85 @@
+return function()
+  local mock = require("deftest.mock.mock")
+  local utils = require("modules.utils")
+
+  describe("utils", function()
+    describe("starts_with", function()
+      it("returns true if string starts with", function()
+        assert_true(utils.starts_with("abcde", "ab"))
+      end)
+
+      it("returns false if string does not start with", function()
+        assert_false(utils.starts_with("abcde", "bc"))
+      end)
+    end)
+
+    describe("ends_with", function()
+      it("returns true if string ends with", function()
+        assert_true(utils.ends_with("abcde", "de"))
+      end)
+
+      it("returns false if string does not end with", function()
+        assert_false(utils.ends_with("abcde", "cd"))
+      end)
+    end)
+
+    describe("map", function()
+      it("returns the mapped array", function()
+        local function func(i)
+          return i * 2
+        end
+        assert_same({ 2, 4, 6 }, utils.map({ 1, 2, 3 }, func))
+      end)
+    end)
+
+    describe("ignore_first", function()
+      it("returns a function that ignores its first argument", function()
+        local func = utils.ignore_first(function(a)
+          return a
+        end)
+        assert_equal(2, func(1, 2))
+      end)
+    end)
+
+    describe("version", function()
+      it("returns a version string", function()
+        local pattern = "%w+ v%d%.%d%.%d%-development\nDefold v%d%.%d%.%d %(%w+%)"
+        assert_match(pattern, utils.version())
+      end)
+    end)
+
+    describe("is_debug", function()
+      it("returns true if this is a debug build", function()
+        mock.mock(sys)
+        sys.get_engine_info.always_returns({ is_debug = true })
+        assert_true(utils.is_debug())
+        mock.unmock(sys)
+      end)
+
+      it("returns false if this is not a debug build", function()
+        mock.mock(sys)
+        sys.get_engine_info.always_returns({ is_debug = false })
+        assert_false(utils.is_debug())
+        mock.unmock(sys)
+      end)
+    end)
+
+    describe("quit", function()
+      it("exits with 0 when platform is not HTML5", function()
+        mock.mock(sys)
+        sys.get_sys_info.always_returns({ system_name = "Linux" })
+        utils.quit()
+        assert_equal(1, sys.exit.calls)
+        mock.unmock(sys)
+      end)
+
+      it("does nothing when platform is HTML5", function()
+        mock.mock(sys)
+        sys.get_sys_info.always_returns({ system_name = "HTML5" })
+        utils.quit()
+        assert_equal(0, sys.exit.calls)
+        mock.unmock(sys)
+      end)
+    end)
+  end)
+end

@@ -30,18 +30,34 @@ export $(cat .env | xargs)
 
 You'll also want to tweak the project name. Make sure to change it both in `game.project`, and in `Makefile`.
 
+## Test
+
+To run unit tests for a specific platforms, do:
+
+```
+$ make test-macos
+```
+
+## Run
+
+To build a debug version of the project and run it, do:
+
+```
+$ make run-macos
+```
+
 ## Build
 
-To build for all platforms, do:
+To build a release version of the project for all platforms, do:
 
 ```
 $ make all APP_VERSION=0.0.1
 ```
 
-To build build a specific platform, do something like:
+To build for a specific platform, do something like:
 
 ```
-$ make macos APP_VERSION=0.0.1
+$ make dist-macos APP_VERSION=0.0.1
 ```
 
 ## Publish

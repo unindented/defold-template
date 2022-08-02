@@ -32,8 +32,8 @@ end
 --- Return a function that ignores its first argument.
 --- @param func function Function
 --- @return function
-function M.ignore_self(func)
-  return function(self, ...)
+function M.ignore_first(func)
+  return function(_, ...)
     return func(...)
   end
 end

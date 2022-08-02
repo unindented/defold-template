@@ -1,7 +1,9 @@
 /.internal
 /build
+/coverage
 /dist
 /node_modules
+/tools
 /assets/steam/*
 !/assets/steam/app_build_1000.txt
 !/assets/steam/app_build_1000.vdf
@@ -9,7 +11,6 @@
 !/assets/steam/depot_build_1002.vdf
 !/assets/steam/depot_build_1003.vdf
 !/assets/steam/depot_build_1004.vdf
-/tools
 .externalToolBuilders
 .DS_Store
 Thumbs.db

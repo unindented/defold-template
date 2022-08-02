@@ -73,6 +73,12 @@ function M.init()
   M.language = detect_language(M.language_list, M.default_language, settings.get(settings.LANGUAGE))
 end
 
+--- Return language list.
+--- @return table
+function M.get_language_list()
+  return M.language_list
+end
+
 --- Return current language.
 --- @return string
 function M.get_language()
@@ -84,12 +90,6 @@ end
 function M.set_language(language)
   M.language = language
   settings.set(settings.LANGUAGE, language)
-end
-
---- Return language list.
---- @return table
-function M.get_language_list()
-  return M.language_list
 end
 
 --- Get translation for key.

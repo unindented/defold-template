@@ -7,7 +7,7 @@ local ui = require("ui.ui")
 
 function init(self)
   self.ui = ui.with(self, function(f)
-    local screen_show = utils.ignore_self(navigation.screen_show)
+    local screen_show = utils.ignore_first(navigation.screen_show)
 
     f:new_custom_button("button_title", screen_show, screens.TITLE)
 

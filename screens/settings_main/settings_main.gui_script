@@ -8,7 +8,7 @@ function init(self)
   ui.set_render_order_popup_content()
 
   self.ui = ui.with(self, function(f)
-    local popup_push = utils.ignore_self(navigation.popup_push)
+    local popup_push = utils.ignore_first(navigation.popup_push)
 
     f:new_custom_heading("heading")
     f:new_custom_button("button_display", popup_push, screens.SETTINGS_DISPLAY)

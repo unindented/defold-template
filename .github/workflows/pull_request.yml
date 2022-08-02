@@ -31,7 +31,9 @@ jobs:
           DEFOLD_PRIVATE_USERNAME: ${{ secrets.DEFOLD_PRIVATE_USERNAME }}
           DEFOLD_PRIVATE_TOKEN: ${{ secrets.DEFOLD_PRIVATE_TOKEN }}
           MACOS_TEAM_ID: ${{ secrets.MACOS_TEAM_ID }}
-        run: make all APP_VERSION=0.0.1
+        run: |
+          make test
+          make all APP_VERSION=0.0.1
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
