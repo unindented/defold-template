@@ -1,6 +1,7 @@
 local deftest = require("deftest.deftest")
 local log = require("modules.log")
 
+local color_spec = require("test.color_spec")
 local csv_spec = require("test.csv_spec")
 local i18n_spec = require("test.i18n_spec")
 local log_spec = require("test.log_spec")
@@ -11,6 +12,7 @@ function init(self)
   log.init()
   log.set_print(false)
 
+  deftest.add(color_spec)
   deftest.add(csv_spec)
   deftest.add(i18n_spec)
   deftest.add(log_spec)

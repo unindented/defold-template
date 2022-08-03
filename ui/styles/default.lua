@@ -9,7 +9,7 @@ M["button"] = {
   CLICK_SOUND = "pluck",
 
   on_mouse_hover = function(self, node, state)
-    local color = state and colors.palette.button_hover or colors.palette.button
+    local color = state and colors.BUTTON_HOVER or colors.BUTTON
     gui.set_color(node, color)
   end,
 

@@ -7,8 +7,7 @@ custom_resources = i18n/
 dependencies#0 = https://github.com/britzl/deftest/archive/refs/tags/2.7.2.zip
 dependencies#1 = https://github.com/britzl/monarch/archive/refs/tags/3.7.0.zip
 dependencies#2 = https://github.com/Insality/druid/archive/0c47828d9691a15989b218916390f0c3337a1934.zip
-dependencies#3 = https://github.com/klaytonkowalski/library-defold-colors/archive/refs/tags/1.1.0.zip
-dependencies#4 = https://github.com/subsoap/defos/archive/refs/tags/v2.7.0.zip
+dependencies#3 = https://github.com/subsoap/defos/archive/refs/tags/v2.7.0.zip
 
 [i18n]
 localizations = en,es,fr

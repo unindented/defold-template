@@ -7,7 +7,7 @@ M["button"] = {
   PRESSED_IMAGE = "button_pressed",
 
   on_mouse_hover = function(self, node, state)
-    local color = state and colors.palette.button_primary_hover or colors.palette.button_primary
+    local color = state and colors.BUTTON_PRIMARY_HOVER or colors.BUTTON_PRIMARY
     gui.set_color(node, color)
   end,
 
