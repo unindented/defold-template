@@ -1,5 +1,9 @@
 local M = {}
 
+----------------------------------------------------------------------------------------------------
+-- String utils
+----------------------------------------------------------------------------------------------------
+
 --- Returns true if a string begins with the characters of a specified string.
 --- @param str string String to search
 --- @param search string String to be searched for
@@ -16,6 +20,10 @@ function M.ends_with(str, search)
   return search == "" or string.sub(str, -#search) == search
 end
 
+----------------------------------------------------------------------------------------------------
+-- Array utils
+----------------------------------------------------------------------------------------------------
+
 --- Return a new array populated with the results of calling a function on every element in the
 --- original array.
 --- @param array table Array
@@ -29,6 +37,10 @@ function M.map(array, func)
   return result
 end
 
+----------------------------------------------------------------------------------------------------
+-- Function utils
+----------------------------------------------------------------------------------------------------
+
 --- Return a function that ignores its first argument.
 --- @param func function Function
 --- @return function
@@ -37,6 +49,49 @@ function M.ignore_first(func)
     return func(...)
   end
 end
+
+local function cache_get(cache, params)
+  local node = cache
+  for i = 1, #params do
+    node = node.children and node.children[params[i]]
+    if not node then
+      return nil
+    end
+  end
+  return node.results
+end
+
+local function cache_put(cache, params, results)
+  local node = cache
+  local param
+  for i = 1, #params do
+    param = params[i]
+    node.children = node.children or {}
+    node.children[param] = node.children[param] or {}
+    node = node.children[param]
+  end
+  node.results = results
+end
+
+--- Return a memoized version of a function
+--- @param func function Function to memoize
+--- @return function
+function M.memoize(func, cache)
+  cache = cache or {}
+  return function(...)
+    local params = { ... }
+    local results = cache_get(cache, params)
+    if not results then
+      results = { func(...) }
+      cache_put(cache, params, results)
+    end
+    return unpack(results)
+  end
+end
+
+----------------------------------------------------------------------------------------------------
+-- Misc utils
+----------------------------------------------------------------------------------------------------
 
 --- Return version information.
 --- @return string
@@ -64,10 +119,25 @@ function M.is_debug()
   return engine_info.is_debug
 end
 
+--- Return the platform name.
+--- @return string
+function M.platform()
+  local sys_info = sys.get_sys_info()
+  return sys_info.system_name
+end
+
+--- Return the save path for a file.
+--- @param filename string File name
+--- @return string
+function M.save_path(filename)
+  local appname = string.gsub(sys.get_config("project.title"), "%W", "")
+  local dirname = (M.platform() == "Linux" and "config/" or "") .. appname
+  return sys.get_save_file(dirname, filename)
+end
+
 --- Quit.
 function M.quit()
-  local sys_info = sys.get_sys_info()
-  if sys_info.system_name ~= "HTML5" then
+  if M.platform() ~= "HTML5" then
     sys.exit(0)
   end
 end

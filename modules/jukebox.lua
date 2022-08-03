@@ -1,3 +1,4 @@
+local log = require("modules.log")
 local messages = require("modules.messages")
 local settings = require("modules.settings")
 
@@ -16,6 +17,7 @@ settings_map[GROUP_EFFECTS] = settings.EFFECTS_VOLUME
 
 local function mute_if_music_playing()
   if sound.is_music_playing() then
+    log.debug("music is playing, muting master")
     sound.set_group_gain("master", 0)
   end
 end

@@ -24,14 +24,17 @@ end
 local function load_locale(key)
   local result = {}
 
+  log.debug("loading locale '" .. key .. "'")
   local csv_str, error = sys.load_resource("/i18n/" .. key .. "/strings.csv")
-  if csv_str then
-    local _, data_iter = csv.parse(csv_str)
-    for original, translation in data_iter do
-      result[original] = translation
-    end
-  else
-    log.e(error)
+
+  if csv_str == nil or error then
+    log.error("could not load locale '" .. key .. "': " .. error)
+    return result, error
+  end
+
+  local _, data_iter = csv.parse(csv_str)
+  for original, translation in data_iter do
+    result[original] = translation
   end
 
   return result
@@ -59,11 +62,17 @@ local function detect_language(language_list, default_language, desired_language
   end
 
   if language_list_lookup[default_language] then
-    log.w("language not in language list; using default as fallback")
+    log.warn(
+      "language '"
+        .. language
+        .. "' not in language list; using default '"
+        .. default_language
+        .. "' as fallback"
+    )
     return default_language
-  else
-    log.e("default language not in language list")
   end
+
+  log.error("default language'" .. default_language .. "'not in language list")
 end
 
 --- Initialize i18n data.
@@ -97,13 +106,13 @@ end
 --- @return string
 function M.get_text(key)
   if key == nil then
-    log.e("key not specified")
+    log.error("key not specified")
     return "KEY NOT SPECIFIED!"
   end
 
   local text = M.locale_data[M.language][key]
   if text == nil then
-    log.e("key " .. key .. " missing for " .. M.language)
+    log.error("key '" .. key .. "' missing for language '" .. M.language .. "'")
     return "MISSING KEY! " .. key
   end
 

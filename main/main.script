@@ -16,7 +16,6 @@ function init(self)
   jukebox.init()
   ui.init()
 
-  -- navigation.debug()
   msg.post("#", messages.SHOW_FIRST_SCREEN)
 end
 

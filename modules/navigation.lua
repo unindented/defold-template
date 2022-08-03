@@ -79,11 +79,6 @@ function M.popup_pop_all()
   monarch.back()
 end
 
---- Enable verbose logging.
-function M.debug()
-  monarch.debug()
-end
-
 --- Return navigation stack.
 --- @return string
 function M.dump_stack()

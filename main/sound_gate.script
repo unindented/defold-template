@@ -22,7 +22,7 @@ function on_message(self, message_id, message, sender)
       self.sounds[message.soundcomponent] = GATE_TIME
       sound.play(message.soundcomponent, { gain = message.gain })
     else
-      log.i("gated sound " .. message.soundcomponent)
+      log.info("gated sound " .. message.soundcomponent)
     end
   end
 end
