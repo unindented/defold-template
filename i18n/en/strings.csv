@@ -11,6 +11,7 @@ button_sound,Sound,Settings menu,Button / Heading
 button_gameplay,Gameplay,Settings menu,Button / Heading
 button_language,Language,Settings menu,Button / Heading
 button_back,Go back,Settings menu,Button
+checkbox_fullscreen,Fullscreen,Display settings menu,Checkbox
 checkbox_reduce_motion,Reduce motion,Display settings menu,Checkbox
 checkbox_disable_shaders,Disable shaders,Display settings menu,Checkbox
 slider_master_volume,Main volume,Sound settings menu,Slider

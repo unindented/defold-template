@@ -73,7 +73,8 @@
     "sys",
     "timer",
     "vmath",
-    "window"
+    "window",
+    "defos"
   ],
   "Lua.diagnostics.disable": [
     "lowercase-global",

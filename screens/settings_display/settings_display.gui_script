@@ -1,6 +1,7 @@
 local actions = require("modules.actions")
 local navigation = require("modules.navigation")
 local settings = require("modules.settings")
+local shell = require("modules.shell")
 local utils = require("modules.utils")
 local ui = require("ui.ui")
 
@@ -8,12 +9,15 @@ function init(self)
   ui.set_render_order_popup_content()
 
   self.ui = ui.with(self, function(f)
+    local is_fullscreen = shell.is_fullscreen()
     local reduce_motion = settings.get(settings.REDUCE_MOTION)
     local disable_shaders = settings.get(settings.DISABLE_SHADERS)
+    local set_fullscreen = utils.ignore_self(shell.set_fullscreen)
     local set_reduce_motion = utils.ignore_self(settings.setter(settings.REDUCE_MOTION))
     local set_disable_shaders = utils.ignore_self(settings.setter(settings.DISABLE_SHADERS))
 
     f:new_custom_heading("heading")
+    f:new_custom_checkbox("checkbox_fullscreen", is_fullscreen, set_fullscreen)
     f:new_custom_checkbox("checkbox_reduce_motion", reduce_motion, set_reduce_motion)
     f:new_custom_checkbox("checkbox_disable_shaders", disable_shaders, set_disable_shaders)
     f:new_custom_button("button_back", navigation.popup_pop)
