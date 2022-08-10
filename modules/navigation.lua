@@ -1,3 +1,7 @@
+----------------------------------------------------------------------------------------------------
+-- Navigation: Screen navigation utils.
+----------------------------------------------------------------------------------------------------
+
 local monarch = require("monarch.monarch")
 local transitions = require("monarch.transitions.gui")
 

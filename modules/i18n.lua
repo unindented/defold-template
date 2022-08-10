@@ -1,14 +1,21 @@
+----------------------------------------------------------------------------------------------------
+-- I18n: Internationalization module.
+----------------------------------------------------------------------------------------------------
+
 local csv = require("modules.csv")
 local log = require("modules.log")
 local settings = require("modules.settings")
 
 local M = {}
 
-M.language = nil
 M.default_language = "en"
-
+M.language = nil
 M.language_list = nil
 M.locale_data = nil
+
+----------------------------------------------------------------------------------------------------
+-- Internal API
+----------------------------------------------------------------------------------------------------
 
 local function load_languages()
   local result = {}
@@ -25,11 +32,11 @@ local function load_locale(key)
   local result = {}
 
   log.debug("loading locale '" .. key .. "'")
-  local csv_str, error = sys.load_resource("/i18n/" .. key .. "/strings.csv")
+  local csv_str, err = sys.load_resource("/i18n/" .. key .. "/strings.csv")
 
-  if csv_str == nil or error then
-    log.error("could not load locale '" .. key .. "': " .. error)
-    return result, error
+  if csv_str == nil or err then
+    log.error("locale '" .. key .. "' could not be loaded: " .. err)
+    return result, err
   end
 
   local _, data_iter = csv.parse(csv_str)
@@ -72,36 +79,40 @@ local function detect_language(language_list, default_language, desired_language
     return default_language
   end
 
-  log.error("default language'" .. default_language .. "'not in language list")
+  log.error("default language'" .. default_language .. "' not in language list")
 end
 
---- Initialize i18n data.
+----------------------------------------------------------------------------------------------------
+-- Public API
+----------------------------------------------------------------------------------------------------
+
+--- Initialize module.
 function M.init()
   M.language_list = load_languages()
   M.locale_data = load_locales(M.language_list)
-  M.language = detect_language(M.language_list, M.default_language, settings.get(settings.LANGUAGE))
+  M.language = detect_language(M.language_list, M.default_language, settings.get_language())
 end
 
---- Return language list.
+--- Return the language list.
 --- @return table
 function M.get_language_list()
   return M.language_list
 end
 
---- Return current language.
+--- Return the current language.
 --- @return string
 function M.get_language()
   return M.language
 end
 
---- Set language.
+--- Set the current language.
 --- @param language string New language
 function M.set_language(language)
   M.language = language
-  settings.set(settings.LANGUAGE, language)
+  settings.set_language(language)
 end
 
---- Get translation for key.
+--- Get the translation for a key.
 --- @param key string|nil Key to translate
 --- @return string
 function M.get_text(key)

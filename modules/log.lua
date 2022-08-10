@@ -1,3 +1,7 @@
+----------------------------------------------------------------------------------------------------
+-- Log: Logging module.
+----------------------------------------------------------------------------------------------------
+
 local utils = require("modules.utils")
 
 local M = {}
@@ -11,6 +15,10 @@ M.FATAL = 5
 M.level = nil
 M.should_print = true
 
+----------------------------------------------------------------------------------------------------
+-- Internal API
+----------------------------------------------------------------------------------------------------
+
 local level_names = {
   "DEBUG",
   "INFO ",
@@ -19,11 +27,30 @@ local level_names = {
   "FATAL",
 }
 
+local function get_debug_info()
+  if debug == nil then
+    return
+  end
+
+  local debug_info = debug.getinfo(4, "Sl")
+  return debug_info.short_src .. ":" .. debug_info.currentline .. ": "
+end
+
+local function get_line(message, level, datetime)
+  local head = datetime .. " - " .. level_names[level] .. " - "
+  local body = get_debug_info() or ""
+  return head .. body .. message
+end
+
+----------------------------------------------------------------------------------------------------
+-- Public API
+----------------------------------------------------------------------------------------------------
+
 --- Initialize logging system.
 function M.init()
   local is_debug = utils.is_debug()
   M.set_level(is_debug and M.DEBUG or M.WARN)
-  M.set_print(is_debug)
+  M.set_print(is_debug or utils.platform() == "HTML5")
 end
 
 --- Set the log level.
@@ -77,14 +104,7 @@ function M.log(message, level)
   local date = os.date("%Y-%m-%d", timestamp)
   local datetime = os.date("%Y-%m-%d %H:%M:%S", timestamp)
 
-  local head = datetime .. " - " .. level_names[level] .. " - "
-  local body = ""
-  if debug then
-    local debug_info = debug.getinfo(3, "Sl")
-    body = debug_info.short_src .. ":" .. debug_info.currentline .. ": "
-  end
-
-  local line = head .. body .. message
+  local line = get_line(message, level, datetime)
 
   if M.should_print then
     print(line)
@@ -95,12 +115,12 @@ function M.log(message, level)
   end
 
   local filename = date .. ".log"
-  local path = utils.save_path(filename)
-  local file, error = io.open(path, "a")
+  local path = utils.state_path(filename)
+  local file, err = io.open(path, "a")
 
-  if file == nil or error then
-    print("could not open file '" .. path .. "': " .. error)
-    return nil, error
+  if file == nil or err then
+    print("could not open file '" .. path .. "': " .. err)
+    return nil, err
   end
 
   file:write(line, "\n")

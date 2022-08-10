@@ -1,3 +1,7 @@
+----------------------------------------------------------------------------------------------------
+-- Jukebox: Sound module.
+----------------------------------------------------------------------------------------------------
+
 local log = require("modules.log")
 local messages = require("modules.messages")
 local settings = require("modules.settings")
@@ -6,14 +10,13 @@ local M = {}
 
 M.current_music = nil
 
+----------------------------------------------------------------------------------------------------
+-- Internal API
+----------------------------------------------------------------------------------------------------
+
 local GROUP_MASTER = hash("master")
 local GROUP_MUSIC = hash("music")
 local GROUP_EFFECTS = hash("effects")
-
-local settings_map = {}
-settings_map[GROUP_MASTER] = settings.MASTER_VOLUME
-settings_map[GROUP_MUSIC] = settings.MUSIC_VOLUME
-settings_map[GROUP_EFFECTS] = settings.EFFECTS_VOLUME
 
 local function mute_if_music_playing()
   if sound.is_music_playing() then
@@ -28,26 +31,23 @@ local function window_callback(self, event, data)
   end
 end
 
-local function get_volume(group)
-  return sound.get_group_gain(group)
-end
+----------------------------------------------------------------------------------------------------
+-- Public API
+----------------------------------------------------------------------------------------------------
 
-local function set_volume(group, value)
-  sound.set_group_gain(group, value)
-  settings.set(settings_map[group], value)
-end
-
---- Initialize sound system.
+--- Initialize sound system by reading volume values from settings.
+--- If music is playing on iOS or Android, mute master.
+--- @see https://defold.com/ref/sound/#sound.is_music_playing
 function M.init()
+  M.set_master_volume(settings.get_master_volume())
+  M.set_music_volume(settings.get_music_volume())
+  M.set_effects_volume(settings.get_effects_volume())
+
   mute_if_music_playing()
   window.set_listener(window_callback)
-
-  M.set_master_volume(settings.get(settings.MASTER_VOLUME))
-  M.set_music_volume(settings.get(settings.MUSIC_VOLUME))
-  M.set_effects_volume(settings.get(settings.EFFECTS_VOLUME))
 end
 
---- Play background music.
+--- Play new background music. If the music to play is the same as the current one, do nothing.
 --- @param sound_name string Sound name
 function M.play_music(sound_name)
   if M.current_music ~= sound_name then
@@ -64,7 +64,8 @@ function M.stop_music()
   end
 end
 
---- Play a sound effect.
+--- Play a sound effect, with gating.
+--- @see https://defold.com/manuals/sound/#gating-sounds
 --- @param sound_name string Sound name
 function M.play_effect(sound_name)
   msg.post(
@@ -83,37 +84,40 @@ end
 --- Return gain level for master group.
 --- @return number
 function M.get_master_volume()
-  return get_volume(GROUP_MASTER)
+  return sound.get_group_gain(GROUP_MASTER)
 end
 
 --- Set gain level for master group.
 --- @param value number Gain level
 function M.set_master_volume(value)
-  set_volume(GROUP_MASTER, value)
+  sound.set_group_gain(GROUP_MASTER, value)
+  settings.set_master_volume(value)
 end
 
 --- Return gain level for music group.
 --- @return number
 function M.get_music_volume()
-  return get_volume(GROUP_MUSIC)
+  return sound.get_group_gain(GROUP_MUSIC)
 end
 
 --- Set gain level for music group.
 --- @param value number Gain level
 function M.set_music_volume(value)
-  set_volume(GROUP_MUSIC, value)
+  sound.set_group_gain(GROUP_MUSIC, value)
+  settings.set_music_volume(value)
 end
 
 --- Return gain level for effects group.
 --- @return number
 function M.get_effects_volume()
-  return get_volume(GROUP_EFFECTS)
+  return sound.get_group_gain(GROUP_EFFECTS)
 end
 
 --- Set gain level for effects group.
 --- @param value number Gain level
 function M.set_effects_volume(value)
-  set_volume(GROUP_EFFECTS, value)
+  sound.set_group_gain(GROUP_EFFECTS, value)
+  settings.set_effects_volume(value)
 end
 
 return M

@@ -7,6 +7,7 @@ return function()
 
       it("parses header columns", function()
         local header_columns, _ = csv.parse(csv_str)
+        assert_not_nil(header_columns)
         assert_same({ "a", "b", "c" }, header_columns)
       end)
 

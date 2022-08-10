@@ -1,3 +1,7 @@
+----------------------------------------------------------------------------------------------------
+-- Utils: All other utils.
+----------------------------------------------------------------------------------------------------
+
 local M = {}
 
 ----------------------------------------------------------------------------------------------------
@@ -33,6 +37,24 @@ function M.map(array, func)
   local result = {}
   for i, v in ipairs(array) do
     result[i] = func(v)
+  end
+  return result
+end
+
+----------------------------------------------------------------------------------------------------
+-- Table utils
+----------------------------------------------------------------------------------------------------
+
+--- Returns a new table with all the given tables merged together.
+--- @param ... table Tables
+--- @return table
+function M.merge(...)
+  local result = {}
+  for i = 1, select("#", ...) do
+    local t = select(i, ...)
+    for k, v in pairs(t) do
+      result[k] = v
+    end
   end
   return result
 end
@@ -126,13 +148,43 @@ function M.platform()
   return sys_info.system_name
 end
 
---- Return the save path for a file.
+local function save_path(filename, xdg_varname, home_subdir)
+  local appname = string.gsub(sys.get_config("project.title"), "%W", "")
+
+  if M.platform() == "Linux" then
+    local xdg_path = os.getenv(xdg_varname)
+    local home_path = os.getenv("HOME")
+
+    if xdg_path ~= nil then
+      return xdg_path .. "/" .. appname .. "/" .. filename
+    end
+    if home_path ~= nil then
+      return home_path .. "/" .. home_subdir .. "/" .. appname .. "/" .. filename
+    end
+  end
+
+  return sys.get_save_file(appname, filename)
+end
+
+--- Return the config path for a file.
 --- @param filename string File name
 --- @return string
-function M.save_path(filename)
-  local appname = string.gsub(sys.get_config("project.title"), "%W", "")
-  local dirname = (M.platform() == "Linux" and "config/" or "") .. appname
-  return sys.get_save_file(dirname, filename)
+function M.config_path(filename)
+  return save_path(filename, "XDG_CONFIG_HOME", ".config")
+end
+
+--- Return the data path for a file.
+--- @param filename string File name
+--- @return string
+function M.data_path(filename)
+  return save_path(filename, "XDG_DATA_HOME", ".local/share")
+end
+
+--- Return the state path for a file.
+--- @param filename string File name
+--- @return string
+function M.state_path(filename)
+  return save_path(filename, "XDG_STATE_HOME", ".local/state")
 end
 
 --- Quit.

@@ -2,25 +2,12 @@ return function()
   local mock_fs = require("deftest.mock.fs")
   local log = require("modules.log")
 
-  local function read(path)
-    local file, error = io.open(path, "rb")
-
-    if file == nil or error then
-      return nil, error
-    end
-
-    local data = file:read("*a")
-    file:close()
-
-    return data
-  end
-
   describe("log", function()
     before(function()
-      mock_fs.mock()
-
       log.set_level(log.DEBUG)
       log.set_print(false)
+
+      mock_fs.mock()
     end)
 
     after(function()
@@ -35,42 +22,42 @@ return function()
 
         log.set_level(log.INFO)
         local path = log.info("info message")
-        assert_match("info message", read(path))
+        assert_match("info message", mock_fs.get_file(path))
       end)
     end)
 
     describe("debug", function()
       it("writes a debug log to disk", function()
         local path = log.debug("debug message")
-        assert_match("- DEBUG - .* - debug message", read(path))
+        assert_match("- DEBUG - .* - debug message", mock_fs.get_file(path))
       end)
     end)
 
     describe("info", function()
       it("writes an info log to disk", function()
         local path = log.info("info message")
-        assert_match("- INFO  - .* - info message", read(path))
+        assert_match("- INFO  - .* - info message", mock_fs.get_file(path))
       end)
     end)
 
     describe("warn", function()
       it("writes a warning log to disk", function()
         local path = log.warn("warning message")
-        assert_match("- WARN  - .* - warning message", read(path))
+        assert_match("- WARN  - .* - warning message", mock_fs.get_file(path))
       end)
     end)
 
     describe("error", function()
       it("writes an error log to disk", function()
         local path = log.error("error message")
-        assert_match("- ERROR - .* - error message", read(path))
+        assert_match("- ERROR - .* - error message", mock_fs.get_file(path))
       end)
     end)
 
     describe("fatal", function()
-      it("writes an fatal log to disk", function()
+      it("writes a fatal log to disk", function()
         local path = log.fatal("fatal message")
-        assert_match("- FATAL - .* - fatal message", read(path))
+        assert_match("- FATAL - .* - fatal message", mock_fs.get_file(path))
       end)
     end)
   end)

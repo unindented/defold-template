@@ -6,17 +6,25 @@ local log = require("modules.log")
 local messages = require("modules.messages")
 local navigation = require("modules.navigation")
 local screens = require("modules.screens")
+local settings = require("modules.settings")
+local shell = require("modules.shell")
 local ui = require("ui.ui")
 
 function init(self)
   msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })
 
   log.init()
+  settings.init()
   i18n.init()
   jukebox.init()
+  shell.init()
   ui.init()
 
   msg.post("#", messages.SHOW_FIRST_SCREEN)
+end
+
+function final(self)
+  settings.final()
 end
 
 function on_message(self, message_id, message, sender)
