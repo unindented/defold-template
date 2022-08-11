@@ -8,6 +8,7 @@ local utils = require("modules.utils")
 local M = {}
 
 M.files = {}
+M.autosave_timer = 10
 
 ----------------------------------------------------------------------------------------------------
 -- Internal API
@@ -71,8 +72,9 @@ function M.load(filename, defaults)
   contents = is_empty and defaults or utils.merge(defaults, contents)
 
   M.files[filename] = {
-    changed = false,
     contents = contents,
+    changed = false,
+    timer = 0,
   }
 
   return loaded, contents
@@ -101,6 +103,19 @@ function M.save(filename, force)
   M.files[filename].changed = not saved
 
   return saved, err
+end
+
+--- Auto-save file if enough time has passed.
+--- @param filename string File name
+--- @param dt number Delta time
+function M.autosave(filename, dt)
+  local file = M.files[filename]
+  file.timer = file.timer + dt
+
+  if file.timer >= M.autosave_timer then
+    file.timer = file.timer - M.autosave_timer
+    M.save(filename)
+  end
 end
 
 --- Return the value for a key in a loaded file.

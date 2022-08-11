@@ -27,6 +27,10 @@ function final(self)
   settings.final()
 end
 
+function update(self, dt)
+  settings.update(dt)
+end
+
 function on_message(self, message_id, message, sender)
   if message_id == messages.SHOW_FIRST_SCREEN_ID then
     navigation.screen_show(screens.TITLE)

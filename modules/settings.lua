@@ -58,6 +58,10 @@ function M.final()
   sticky.save(FILENAME)
 end
 
+function M.update(dt)
+  sticky.autosave(FILENAME, dt)
+end
+
 function M.get_fullscreen()
   return get(FULLSCREEN)
 end
