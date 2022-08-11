@@ -37,6 +37,7 @@ STEAMCMD_SHA256 := 8ecc17c8988e5acadcc78e631c48490f76150f2dfaa6cf8d7b4b67b097bd7
 
 # Outputs
 
+COMMON_DIST_LICENSE := $(DIST_DIR)/LICENSE.md
 COMMON_DIST_CHANGELOG := $(DIST_DIR)/CHANGELOG.md
 
 WINDOWS_ICONSET := $(WINDOWS_ASSETS_DIR)/iconset
@@ -225,7 +226,7 @@ $(STEAM_SSFN_FILE):
 	chmod 777 "$@"
 
 resolve: $(RESOLVE_DIR)
-dist-common: $(COMMON_DIST_CHANGELOG)
+dist-common: $(COMMON_DIST_LICENSE) $(COMMON_DIST_CHANGELOG)
 dist-windows: $(WINDOWS_DIST_ZIP) $(WINDOWS_DIST_APP)
 dist-macos: $(MACOS_DIST_ZIP) $(MACOS_DIST_DMG) $(MACOS_DIST_APP)
 dist-linux: $(LINUX_DIST_ZIP) $(LINUX_DIST_APP)
@@ -233,6 +234,10 @@ dist-web: $(WEB_DIST_ZIP)
 
 $(RESOLVE_DIR): $(BOB_PATH)
 	java -jar "$(BOB_PATH)" resolve
+
+$(COMMON_DIST_LICENSE): LICENSE.md
+	mkdir -p `dirname "$@"`
+	cp "$<" "$@"
 
 $(COMMON_DIST_CHANGELOG): CHANGELOG.md
 	mkdir -p `dirname "$@"`
