@@ -1,4 +1,5 @@
 local actions = require("modules.actions")
+local analytics = require("modules.analytics")
 local navigation = require("modules.navigation")
 local screens = require("modules.screens")
 local utils = require("modules.utils")
@@ -22,6 +23,8 @@ function init(self)
   end)
 
   self.transition = navigation.transition_popup(gui.get_node("root"))
+
+  analytics.screen("settings")
 end
 
 function final(self)

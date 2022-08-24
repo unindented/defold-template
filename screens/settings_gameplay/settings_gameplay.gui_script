@@ -1,4 +1,5 @@
 local actions = require("modules.actions")
+local analytics = require("modules.analytics")
 local navigation = require("modules.navigation")
 local ui = require("ui.ui")
 
@@ -14,6 +15,8 @@ function init(self)
   end)
 
   self.transition = navigation.transition_popup(gui.get_node("root"))
+
+  analytics.screen("settings/gameplay")
 end
 
 function final(self)

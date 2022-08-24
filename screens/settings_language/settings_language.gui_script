@@ -1,4 +1,5 @@
 local actions = require("modules.actions")
+local analytics = require("modules.analytics")
 local i18n = require("modules.i18n")
 local navigation = require("modules.navigation")
 local ui = require("ui.ui")
@@ -28,6 +29,8 @@ function init(self)
   end)
 
   self.transition = navigation.transition_popup(gui.get_node("root"))
+
+  analytics.screen("settings/language")
 end
 
 function final(self)

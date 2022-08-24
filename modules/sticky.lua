@@ -8,7 +8,7 @@ local utils = require("modules.utils")
 local M = {}
 
 M.files = {}
-M.autosave_timer = 10
+M.autosave_interval = 10
 
 ----------------------------------------------------------------------------------------------------
 -- Internal API
@@ -74,7 +74,7 @@ function M.load(filename, defaults)
   M.files[filename] = {
     contents = contents,
     changed = false,
-    timer = 0,
+    autosave_timer = 0,
   }
 
   return loaded, contents
@@ -110,10 +110,10 @@ end
 --- @param dt number Delta time
 function M.autosave(filename, dt)
   local file = M.files[filename]
-  file.timer = file.timer + dt
+  file.autosave_timer = file.autosave_timer + dt
 
-  if file.timer >= M.autosave_timer then
-    file.timer = file.timer - M.autosave_timer
+  if file.autosave_timer >= M.autosave_interval then
+    file.autosave_timer = file.autosave_timer - M.autosave_interval
     M.save(filename)
   end
 end
