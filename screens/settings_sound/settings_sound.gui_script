@@ -1,4 +1,5 @@
 local actions = require("modules.actions")
+local analytics = require("modules.analytics")
 local jukebox = require("modules.jukebox")
 local navigation = require("modules.navigation")
 local utils = require("modules.utils")
@@ -26,6 +27,8 @@ function init(self)
   end)
 
   self.transition = navigation.transition_popup(gui.get_node("root"))
+
+  analytics.screen("settings/sound")
 end
 
 function final(self)

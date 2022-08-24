@@ -95,6 +95,11 @@ function M.fatal(message)
   return M.log(message, M.FATAL)
 end
 
+--- Log a message.
+--- @param message string Message
+--- @param level number Level
+--- @return string|nil
+--- @return any
 function M.log(message, level)
   if level < M.level then
     return nil

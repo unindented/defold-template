@@ -50,14 +50,18 @@ end
 -- Public API
 ----------------------------------------------------------------------------------------------------
 
+--- Load saved settings.
 function M.init()
   sticky.load(FILENAME, defaults)
 end
 
+--- Save settings before quitting.
 function M.final()
   sticky.save(FILENAME)
 end
 
+--- Save settings on an interval.
+--- @param dt number Delta time
 function M.update(dt)
   sticky.autosave(FILENAME, dt)
 end

@@ -52,3 +52,7 @@ show_made_with_defold = 0
 show_fullscreen_button = 0
 cssfile = /builtins/manifests/web/dark_theme.css
 
+
+[umami]
+dsn = https://umm.unindented.org
+website_id = fb23ae98-ac70-4b01-8446-f7dbaebc3598

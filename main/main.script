@@ -1,5 +1,6 @@
 require("modules.utf8")
 
+local analytics = require("modules.analytics")
 local i18n = require("modules.i18n")
 local jukebox = require("modules.jukebox")
 local log = require("modules.log")
@@ -14,6 +15,7 @@ function init(self)
   msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })
 
   log.init()
+  analytics.init()
   settings.init()
   i18n.init()
   jukebox.init()
@@ -24,10 +26,12 @@ function init(self)
 end
 
 function final(self)
+  analytics.final()
   settings.final()
 end
 
 function update(self, dt)
+  analytics.update(dt)
   settings.update(dt)
 end
 
