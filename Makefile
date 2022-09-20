@@ -21,8 +21,8 @@ STEAM_SSFN_FILE := $(STEAM_HOME)/$(STEAM_SSFN_NAME)
 # Tools
 
 BOB_PATH := $(TOOLS_DIR)/bob.jar
-BOB_VERSION := 1.3.5
-BOB_SHA256 := 4ed9510714aaccf20646c349f80539a94b30d552d74f895d0e87928b663af19e
+BOB_VERSION := 1.3.6
+BOB_SHA256 := 2437a306ab20e754700b69c4ea2be277507a358e90b91d928d0788f3c94336be
 
 RCEDIT_PATH := $(TOOLS_DIR)/rcedit.exe
 RCEDIT_VERSION := 1.1.1
@@ -113,7 +113,7 @@ test-macos: $(BOB_PATH)
 	mkdir -p "$(COVERAGE_DIR)"
 	java -jar "$(BOB_PATH)" \
 		--variant headless \
-		--platform x86_64-darwin \
+		--platform x86_64-macos \
 		build
 	chmod +x "$(BUILD_DIR)/x86_64-osx/dmengine"
 	"$(BUILD_DIR)/x86_64-osx/dmengine" --config="bootstrap.main_collection=/test/test.collectionc"
@@ -138,7 +138,7 @@ run-windows: $(BOB_PATH)
 .PHONY: run-macos
 run-macos: $(BOB_PATH)
 	java -jar "$(BOB_PATH)" \
-		--platform x86_64-darwin \
+		--platform x86_64-macos \
 		build
 	chmod +x "$(BUILD_DIR)/x86_64-osx/dmengine"
 	rm "$(BUILD_DIR)/x86_64-osx/Info.plist"
@@ -293,7 +293,7 @@ $(MACOS_UNNOTARIZED_DIST_APP): $(MACOS_ICON) $(BOB_PATH)
 		--bundle-output "$(MACOS_UNNOTARIZED_DIST_DIR)" \
 		--exclude-build-folder test \
 		--texture-compression true \
-		--platform x86_64-darwin \
+		--platform x86_64-macos \
 		distclean build bundle
 	/usr/bin/codesign -vvv --force --deep --timestamp --options runtime --entitlements "$(MACOS_ASSETS_DIR)/Entitlements.plist" --sign $(MACOS_TEAM_ID) "$@"
 	/usr/bin/codesign -vvvv --deep "$@"
