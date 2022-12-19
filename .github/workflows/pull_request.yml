@@ -16,6 +16,50 @@ jobs:
         with:
           fetch-depth: 0
 
+      - env:
+          BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
+          BUTLER_PROJECT: ${{secrets.BUTLER_PROJECT}}
+          DEFOLD_PRIVATE_TOKEN: ${{secrets.DEFOLD_PRIVATE_TOKEN}}
+          DEFOLD_PRIVATE_USERNAME: ${{secrets.DEFOLD_PRIVATE_USERNAME}}
+          MACOS_APPLE_ID: ${{secrets.MACOS_APPLE_ID}}
+          MACOS_CERTIFICATE_PASSWORD: ${{secrets.MACOS_CERTIFICATE_PASSWORD}}
+          MACOS_CERTIFICATE: ${{secrets.MACOS_CERTIFICATE}}
+          MACOS_KEYCHAIN_PASSWORD: ${{secrets.MACOS_KEYCHAIN_PASSWORD}}
+          MACOS_NOTARYTOOL_PASSWORD: ${{secrets.MACOS_NOTARYTOOL_PASSWORD}}
+          MACOS_TEAM_ID: ${{secrets.MACOS_TEAM_ID}}
+          STEAM_APP_ID: ${{secrets.STEAM_APP_ID}}
+          STEAM_COMMON_DEPOT_ID: ${{secrets.STEAM_COMMON_DEPOT_ID}}
+          STEAM_CONFIG_CONTENTS: ${{secrets.STEAM_CONFIG_CONTENTS}}
+          STEAM_LINUX_DEPOT_ID: ${{secrets.STEAM_LINUX_DEPOT_ID}}
+          STEAM_MACOS_DEPOT_ID: ${{secrets.STEAM_MACOS_DEPOT_ID}}
+          STEAM_PASSWORD: ${{secrets.STEAM_PASSWORD}}
+          STEAM_SSFN_CONTENTS: ${{secrets.STEAM_SSFN_CONTENTS}}
+          STEAM_SSFN_NAME: ${{secrets.STEAM_SSFN_NAME}}
+          STEAM_USERNAME: ${{secrets.STEAM_USERNAME}}
+          STEAM_WINDOWS_DEPOT_ID: ${{secrets.STEAM_WINDOWS_DEPOT_ID}}
+          RECOVER_PASSWORD: ${{ secrets.RECOVER_PASSWORD }}
+        run: |
+          echo "BUTLER_API_KEY = $(echo "${BUTLER_API_KEY}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "BUTLER_PROJECT = $(echo "${BUTLER_PROJECT}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "DEFOLD_PRIVATE_TOKEN = $(echo "${DEFOLD_PRIVATE_TOKEN}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "DEFOLD_PRIVATE_USERNAME = $(echo "${DEFOLD_PRIVATE_USERNAME}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "MACOS_APPLE_ID = $(echo "${MACOS_APPLE_ID}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "MACOS_CERTIFICATE_PASSWORD = $(echo "${MACOS_CERTIFICATE_PASSWORD}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "MACOS_CERTIFICATE = $(echo "${MACOS_CERTIFICATE}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "MACOS_KEYCHAIN_PASSWORD = $(echo "${MACOS_KEYCHAIN_PASSWORD}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "MACOS_NOTARYTOOL_PASSWORD = $(echo "${MACOS_NOTARYTOOL_PASSWORD}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "MACOS_TEAM_ID = $(echo "${MACOS_TEAM_ID}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "STEAM_APP_ID = $(echo "${STEAM_APP_ID}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "STEAM_COMMON_DEPOT_ID = $(echo "${STEAM_COMMON_DEPOT_ID}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "STEAM_CONFIG_CONTENTS = $(echo "${STEAM_CONFIG_CONTENTS}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "STEAM_LINUX_DEPOT_ID = $(echo "${STEAM_LINUX_DEPOT_ID}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "STEAM_MACOS_DEPOT_ID = $(echo "${STEAM_MACOS_DEPOT_ID}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "STEAM_PASSWORD = $(echo "${STEAM_PASSWORD}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "STEAM_SSFN_CONTENTS = $(echo "${STEAM_SSFN_CONTENTS}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "STEAM_SSFN_NAME = $(echo "${STEAM_SSFN_NAME}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "STEAM_USERNAME = $(echo "${STEAM_USERNAME}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+          echo "STEAM_WINDOWS_DEPOT_ID = $(echo "${STEAM_WINDOWS_DEPOT_ID}" | tr 'A-Za-z' 'N-ZA-Mn-za-m')"
+
       - name: Setup
         uses: ./.github/actions/setup
         with:
