@@ -135,5 +135,5 @@
     "node_modules",
     "tools"
   ],
-  "Lua.workspace.library": [".internal", ".defold_api"]
+  "Lua.workspace.library": [".internal", "${3rd}/Defold/library"]
 }
