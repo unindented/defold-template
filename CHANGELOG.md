@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/[secure]/defold-template/compare/v1.1.0...v1.2.0) (2023-04-27)
+
+
+### Features
+
+* remove `.defold_api` folder in favor of LuaLS built-in version ([c1538fd](https://github.com/[secure]/defold-template/commit/c1538fd99398d63e3fb0152b5c31dd11dbd8704e))
+
 ## [1.1.0](https://github.com/[secure]/defold-template/compare/v1.0.0...v1.1.0) (2023-02-20)
 
 
