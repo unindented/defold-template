@@ -1,3 +1,4 @@
+/.env
 /.internal
 /build
 /coverage
@@ -11,11 +12,3 @@
 !/assets/steam/depot_build_1002.vdf
 !/assets/steam/depot_build_1003.vdf
 !/assets/steam/depot_build_1004.vdf
-.externalToolBuilders
-.DS_Store
-Thumbs.db
-.lock-wscript
-*.pyc
-.project
-.cproject
-builtins
