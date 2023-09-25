@@ -18,32 +18,12 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
-        with:
-          macos_team_id: ${{ secrets.MACOS_TEAM_ID }}
-          macos_apple_id: ${{ secrets.MACOS_APPLE_ID }}
-          macos_certificate: ${{ secrets.MACOS_CERTIFICATE }}
-          macos_certificate_password: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
-          macos_keychain_password: ${{ secrets.MACOS_KEYCHAIN_PASSWORD }}
-          macos_notarytool_password: ${{ secrets.MACOS_NOTARYTOOL_PASSWORD }}
 
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFOLD_PRIVATE_USERNAME: ${{ secrets.DEFOLD_PRIVATE_USERNAME }}
-          DEFOLD_PRIVATE_TOKEN: ${{ secrets.DEFOLD_PRIVATE_TOKEN }}
-          MACOS_TEAM_ID: ${{ secrets.MACOS_TEAM_ID }}
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
           BUTLER_PROJECT: ${{ secrets.BUTLER_PROJECT }}
-          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
-          STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
-          STEAM_APP_ID: ${{ secrets.STEAM_APP_ID }}
-          STEAM_COMMON_DEPOT_ID: ${{ secrets.STEAM_COMMON_DEPOT_ID }}
-          STEAM_WINDOWS_DEPOT_ID: ${{ secrets.STEAM_WINDOWS_DEPOT_ID }}
-          STEAM_MACOS_DEPOT_ID: ${{ secrets.STEAM_MACOS_DEPOT_ID }}
-          STEAM_LINUX_DEPOT_ID: ${{ secrets.STEAM_LINUX_DEPOT_ID }}
-          STEAM_SSFN_NAME: ${{ secrets.STEAM_SSFN_NAME }}
-          STEAM_SSFN_CONTENTS: ${{ secrets.STEAM_SSFN_CONTENTS }}
-          STEAM_CONFIG_CONTENTS: ${{ secrets.STEAM_CONFIG_CONTENTS }}
         run: |
           make test
           make release

@@ -18,22 +18,12 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
-        with:
-          macos_team_id: ${{ secrets.MACOS_TEAM_ID }}
-          macos_apple_id: ${{ secrets.MACOS_APPLE_ID }}
-          macos_certificate: ${{ secrets.MACOS_CERTIFICATE }}
-          macos_certificate_password: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
-          macos_keychain_password: ${{ secrets.MACOS_KEYCHAIN_PASSWORD }}
-          macos_notarytool_password: ${{ secrets.MACOS_NOTARYTOOL_PASSWORD }}
 
       - name: Build
         env:
-          DEFOLD_PRIVATE_USERNAME: ${{ secrets.DEFOLD_PRIVATE_USERNAME }}
-          DEFOLD_PRIVATE_TOKEN: ${{ secrets.DEFOLD_PRIVATE_TOKEN }}
-          MACOS_TEAM_ID: ${{ secrets.MACOS_TEAM_ID }}
+          APP_VERSION: "0.0.1"
         run: |
-          make test
-          make all APP_VERSION=0.0.1
+          make all
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3

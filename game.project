@@ -8,8 +8,6 @@ dependencies#0 = https://github.com/britzl/deftest/archive/refs/tags/2.7.2.zip
 dependencies#1 = https://github.com/britzl/monarch/archive/refs/tags/3.7.0.zip
 dependencies#2 = https://github.com/Insality/druid/archive/refs/tags/0.10.3.zip
 dependencies#3 = https://github.com/subsoap/defos/archive/refs/tags/v2.7.0.zip
-dependencies#4 = https://__DEFOLD_PRIVATE_USERNAME__:__DEFOLD_PRIVATE_TOKEN__@github.com/unindented/defold-prometheus/archive/refs/tags/2.0.0.zip
-dependencies#5 = https://__DEFOLD_PRIVATE_USERNAME__:__DEFOLD_PRIVATE_TOKEN__@github.com/unindented/defold-encryption/archive/refs/tags/1.0.0.zip
 
 [i18n]
 localizations = en,es,fr
