@@ -1,3 +1,10 @@
+## [1.5.0](https://github.com/[secure]/defold-template/compare/v1.4.0...v1.5.0) (2023-09-25)
+
+
+### Features
+
+* update Defold to 1.5.0 ([3dee639](https://github.com/[secure]/defold-template/commit/3dee639d93567a6bc228360ef5f4eada193d5a38))
+
 ## [1.4.0](https://github.com/[secure]/defold-template/compare/v1.3.0...v1.4.0) (2023-05-26)
 
 
