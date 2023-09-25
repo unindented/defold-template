@@ -37,7 +37,7 @@ runs:
       uses: actions/setup-java@v3
       with:
         distribution: microsoft
-        java-version: "11"
+        java-version: "17"
 
     - name: Set up Node
       uses: actions/setup-node@v3
