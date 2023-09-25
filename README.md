@@ -95,4 +95,4 @@ Daniel Perez Alvarez ([daniel@unindented.org](mailto:daniel@unindented.org))
 
 ## License
 
-Copyright (c) 2022 Daniel Perez Alvarez ([unindented.org](https://www.unindented.org/)). This is free software, and may be redistributed under the terms specified in the LICENSE file.
+Copyright (c) 2023 Daniel Perez Alvarez ([unindented.org](https://www.unindented.org/)). This is free software, and may be redistributed under the terms specified in the LICENSE file.
